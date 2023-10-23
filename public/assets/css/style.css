@@ -1,0 +1,38 @@
+  .shipping {
+    background-color: #CB416B;
+    height: 80px;
+    width: 80px;
+    margin-bottom: 20px;
+  }
+  
+  .shipping:hover {
+    background-color: #872657;
+  }
+
+  .btn-product {
+    display: none;
+  }
+  
+  .card-product {
+    position: relative;
+  }
+
+  .card-product .btn-product {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0; /* Start with opacity 0 to make the element invisible */
+    transition: opacity 1s ease; /* Smoother transition duration */
+}
+
+.card-product:hover .btn-product {
+    opacity: 1; /* Set opacity to 1 to make it visible with a fade-in effect */
+}
