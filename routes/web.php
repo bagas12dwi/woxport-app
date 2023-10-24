@@ -30,8 +30,28 @@ Route::get('/blog', function () {
     return view('users.blog');
 });
 
+Route::get('/blog/detail', function () {
+    return view('users.blog-detail');
+});
+
 Route::get('/contact', function () {
     return view('users.contact');
+});
+
+Route::get('/vendor', function () {
+    return view('users.vendor');
+});
+
+Route::get('/vendor/detail', function () {
+    return view('users.vendor-detail');
+});
+
+Route::get('/wishlist', function () {
+    return view('users.wishlist');
+});
+
+Route::get('/cart', function () {
+    return view('users.cart');
 });
 
 Auth::routes();

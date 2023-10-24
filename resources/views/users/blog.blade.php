@@ -12,7 +12,7 @@
                         <h5 class="card-title">Popular</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                             additional content. This content is a little bit longer.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="{{ url('blog/detail') }}" class="btn btn-primary">Read More</a>
                         <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         <h5 class="card-title">Popular</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                             additional content. This content is a little bit longer.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="{{ url('blog/detail') }}" class="btn btn-primary">Read More</a>
                         <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                         <h5 class="card-title">Popular</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                             additional content. This content is a little bit longer.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="{{ url('blog/detail') }}" class="btn btn-primary">Read More</a>
                         <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         <h5 class="card-title">Popular</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                             additional content. This content is a little bit longer.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <a href="{{ url('blog/detail') }}" class="btn btn-primary">Read More</a>
                         <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
                     </div>
                 </div>

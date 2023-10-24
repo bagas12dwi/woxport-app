@@ -12,7 +12,7 @@
                         <div
                             class="btn-product text-center flex-column align-items-center justify-content-center text-white rounded">
 
-                            <a href="#" class="btn btn-primary">Cari Vendor</a>
+                            <a href="{{ url('/vendor') }}" class="btn btn-primary">Cari Vendor</a>
                         </div>
                         <h5 class="card-title fw-bold text-primary text-center">Special</h5>
                         <p class="card-text text-center">Wedding Organizer</p>
@@ -27,7 +27,7 @@
                         <div
                             class="btn-product text-center flex-column align-items-center justify-content-center text-white rounded">
 
-                            <a href="#" class="btn btn-primary">Cari Vendor</a>
+                            <a href="{{ url('/vendor') }}" class="btn btn-primary">Cari Vendor</a>
                         </div>
                         <h5 class="card-title fw-bold text-primary text-center">Special</h5>
                         <p class="card-text text-center">MUA</p>
@@ -42,7 +42,7 @@
                         <div
                             class="btn-product text-center flex-column align-items-center justify-content-center text-white rounded">
 
-                            <a href="#" class="btn btn-primary">Cari Vendor</a>
+                            <a href="{{ url('/vendor') }}" class="btn btn-primary">Cari Vendor</a>
                         </div>
                         <h5 class="card-title fw-bold text-primary text-center">Special</h5>
                         <p class="card-text text-center">Fotografer</p>
@@ -57,7 +57,7 @@
                         <div
                             class="btn-product text-center flex-column align-items-center justify-content-center text-white rounded">
 
-                            <a href="#" class="btn btn-primary">Cari Vendor</a>
+                            <a href="{{ url('/vendor') }}" class="btn btn-primary">Cari Vendor</a>
                         </div>
                         <h5 class="card-title fw-bold text-primary text-center">Special</h5>
                         <p class="card-text text-center">Catering</p>
@@ -72,7 +72,7 @@
                         <div
                             class="btn-product text-center flex-column align-items-center justify-content-center text-white rounded">
 
-                            <a href="#" class="btn btn-primary">Cari Vendor</a>
+                            <a href="{{ url('/vendor') }}" class="btn btn-primary">Cari Vendor</a>
                         </div>
                         <h5 class="card-title fw-bold text-primary text-center">Special</h5>
                         <p class="card-text text-center">Wardrobe</p>
@@ -87,7 +87,7 @@
                         <div
                             class="btn-product text-center flex-column align-items-center justify-content-center text-white rounded">
 
-                            <a href="#" class="btn btn-primary">Cari Vendor</a>
+                            <a href="{{ url('/vendor') }}" class="btn btn-primary">Cari Vendor</a>
                         </div>
                         <h5 class="card-title fw-bold text-primary text-center">Special</h5>
                         <p class="card-text text-center">Decoration and Lighting</p>
