@@ -1,73 +1,64 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+@section('konten')
+    <div class="container" style="margin-top: 99px">
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if (session()->has('errorLogin'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('errorLogin') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <main class="form-signin">
+                    <form action="/login" method="POST">
                         @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="text-center">
+                            <img class="mb-4" src="/asssets/img/logo-hitam.png" alt="" width="100">
                         </div>
+                        <h1 class="h3 mb-3 fw-normal text-center">Silahkan Login</h1>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                        <div class="form-floating">
+                            <input type="email" name="email"
+                                class="form-control @error('email')
+                    is-invalid                        
+                    @enderror"
+                                id="email" placeholder="name@example.com" required value="{{ old('email') }}"
+                                autofocus>
+                            <label for="email">Alamat Email</label>
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
-                            </div>
+                            @enderror
                         </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
+                        <div class="form-floating">
+                            <input type="password" name="password"
+                                class="form-control @error('password')
+                    is-invalid                        
+                    @enderror"
+                                id="password" placeholder="Password" required>
+                            <label for="password">Password</label>
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
+                        <button class="w-100 btn btn-lg btn-primary my-3" type="submit">Login</button>
                     </form>
-                </div>
+                    <small class="d-block text-center">Belum Punya Akun? <a href="/register">Daftar Sekarang</a> </small>
+                </main>
             </div>
         </div>
     </div>
-</div>
 @endsection

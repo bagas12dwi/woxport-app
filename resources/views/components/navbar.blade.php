@@ -42,18 +42,22 @@
                         <i class="bi bi-person-circle fs-5 ms-2"></i>
                     </a>
                     <ul class="dropdown-menu bg-white border-0 shadow-sm">
-                        <li><a class="dropdown-item" href="#">
+                        <li><a class="dropdown-item" href="{{ url('profile') }}">
                                 <i class="bi bi-person-circle me-2"></i>
                                 Profile</a></li>
                         <li>
-                            <hr class="dropdown-divider">
+                        <li><a class="dropdown-item" href="{{ url('change-password') }}">
+                                <i class="bi bi-key me-2"></i>
+                                Change Password</a></li>
+                        <li>
+                            <hr class="dropdown-divider mx-2">
                         </li>
                         <li><a class="dropdown-item" href="#">
                                 <i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
                     </ul>
                 </li>
             </ul>
-            <button class="btn btn-primary me-2" type="submit">Login</button>
+            <a href="{{ url('login') }}" class="btn btn-primary me-2" type="submit">Login</a>
         </div>
     </div>
 </nav>

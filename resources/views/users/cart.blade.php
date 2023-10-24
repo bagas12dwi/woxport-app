@@ -47,9 +47,9 @@
                             <h6 class="fw-bold">Total Harga</h6>
                             <h6 class="fw-bold">Rp. 100.000</h6>
                         </div>
-                        <button class="btn btn-primary w-100">
+                        <a href="{{ url('payment') }}" class="btn btn-primary w-100">
                             Beli (1)
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

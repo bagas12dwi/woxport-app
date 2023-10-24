@@ -1,77 +1,74 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+@section('konten')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
+                <main class="form-signin">
+                    <form action="/register" method="POST">
                         @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="text-center">
+                            <img class="mb-4" src="/asssets/img/logo-hitam.png" alt="" width="100">
                         </div>
+                        <h1 class="h3 mb-3 fw-normal text-center">Silahkan Daftar</h1>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="form-floating">
+                            <input type="text" name="nama"
+                                class="form-control @error('nama')
+                        is-invalid                        
+                    @enderror"
+                                id="nama" placeholder="Nama" required value="{{ old('nama') }}">
+                            <label for="nama">Nama Lengkap</label>
+                            @error('nama')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="form-floating">
+                            <input type="text" name="phone"
+                                class="form-control @error('phone')
+                    is-invalid                        
+                    @enderror"
+                                id="phone" placeholder="phone" required value="{{ old('phone') }}">
+                            <label for="phone">No. Telepon</label>
+                            @error('uesrname')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                        <div class="form-floating">
+                            <input type="email" name="email"
+                                class="form-control @error('email')
+                    is-invalid                        
+                    @enderror"
+                                id="email" placeholder="name@example.com" required value="{{ old('email') }}">
+                            <label for="email">Alamat Email</label>
+                            @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
+                        <div class="form-floating">
+                            <input type="password" name="password"
+                                class="form-control @error('password')
+                    is-invalid                        
+                    @enderror"
+                                id="password" placeholder="Password" required>
+                            <label for="password">Password</label>
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
+                        <button class="w-100 btn btn-lg my-3 btn-primary" type="submit">Daftar</button>
                     </form>
-                </div>
+                    <small class="d-block text-center">Sudah Punya Akun? <a href="/login">Masuk</a> </small>
+                </main>
             </div>
         </div>
     </div>
-</div>
 @endsection

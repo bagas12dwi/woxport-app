@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ URL::asset('/assets/css/style.css') }}">
 </head>
 
-<body style="overflow-x: hidden">
+<body style="overflow-x: hidden;">
     <div id="app">
         @include('components.navbar')
 

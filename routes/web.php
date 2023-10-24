@@ -54,6 +54,25 @@ Route::get('/cart', function () {
     return view('users.cart');
 });
 
-Auth::routes();
+Route::get('/profile', function () {
+    return view('users.profile');
+});
+
+Route::get('/change-password', function () {
+    return view('users.change-password');
+});
+
+Route::get('/payment', function () {
+    return view('users.confirm-payment');
+});
+
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
+Route::get('/register', function () {
+    return view('auth.register');
+});
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

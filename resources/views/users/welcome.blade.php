@@ -9,7 +9,7 @@
                         <br>
                         <span class="text-black"> In Here!</span>
                     </h1>
-                    <button class="btn btn-primary text-uppercase fw-bold">Shop Now ></button>
+                    <a href="{{ url('product') }}" class="btn btn-primary text-uppercase fw-bold">Shop Now ></a>
                 </div>
                 <div class="col-md-6 col-sm-12 text-center">
                     <img src="{{ URL::asset('/assets/images/main-bg.png') }}" alt="home" class="img-fluid">
@@ -114,8 +114,8 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="card mx-auto bg-white border-0 shadow" style="width: 16rem;">
-                        <img src="{{ URL::asset('/assets/images/rec-4.jpg') }}" class="card-img-top" alt="Mommy Cathering"
-                            style="height: 200px; object-fit: cover;">
+                        <img src="{{ URL::asset('/assets/images/rec-4.jpg') }}" class="card-img-top"
+                            alt="Mommy Cathering" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title fw-bold text-uppercase">Mommy Cathering</h5>
                         </div>
