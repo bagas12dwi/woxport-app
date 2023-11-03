@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +21,37 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        User::create([
+            'name' => 'Bagas Dwi',
+            'email' => 'bag12dwi.s@gmail.com',
+            'password' => bcrypt('123'),
+            'role' => 'user'
+        ]);
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('123'),
+            'role' => 'admin'
+        ]);
+        User::create([
+            'name' => 'Alex Wedding',
+            'email' => 'alex@gmail.com',
+            'password' => bcrypt('123'),
+            'role' => 'vendor'
+        ]);
+
+        Category::create([
+            'category_name' => 'MUA',
+            'img_path' => ''
+        ]);
+        Category::create([
+            'category_name' => 'Wedding Organizer',
+            'img_path' => ''
+        ]);
+        Category::create([
+            'category_name' => 'Fotografer',
+            'img_path' => ''
+        ]);
     }
 }
