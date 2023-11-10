@@ -76,6 +76,14 @@
                     <span class="sidebar-text">Kategori</span>
                 </a>
             </li>
+            <li class="nav-item {{ $title == 'Blog' ? 'active' : '' }}">
+                <a href="{{ url('manage-blog') }}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <i class="bi bi-file-post fs-5"></i>
+                    </span>
+                    <span class="sidebar-text">Blog</span>
+                </a>
+            </li>
             <li class="nav-item {{ $title == 'User' ? 'active' : '' }}">
                 <a href="{{ url('user') }}" class="nav-link">
                     <span class="sidebar-icon">

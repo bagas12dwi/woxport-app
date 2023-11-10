@@ -50,6 +50,20 @@
                                 <i class="bi bi-key me-2"></i>
                                 Change Password</a></li>
                         <li>
+                        <li>
+                            <hr class="dropdown-divider mx-2">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ url('vendor/toko') }}">
+                                <i class="bi bi-shop me-2"></i>
+                                Toko
+                            </a>
+                        </li>
+                        <li><a class="dropdown-item" href="{{ url('vendor/produk') }}">
+                                <i class="bi bi-basket3-fill me-2"></i>
+                                Produk
+                            </a>
+                        </li>
+                        <li>
                             <hr class="dropdown-divider mx-2">
                         </li>
                         <li><a class="dropdown-item" href="#">

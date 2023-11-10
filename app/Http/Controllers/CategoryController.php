@@ -75,7 +75,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $kategori)
     {
         $validatedData = $request->validate([
-            'img_path' => 'required | image',
+            'img_path' => 'image',
             'category_name' => 'required'
         ]);
 
@@ -95,6 +95,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $kategori)
     {
+        Storage::delete($kategori->img_path);
         Category::destroy($kategori->id);
         return redirect()->intended('/kategori')->with('success', 'Data Berhasil Dihapus ! ');
     }

@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -58,7 +61,7 @@ Route::get('/cart', function () {
 });
 
 Route::get('/profile', function () {
-    return view('users.profile');
+    return view('users.profile', ['title' => "Profile"]);
 });
 
 Route::get('/change-password', function () {
@@ -77,11 +80,15 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
+// ROUTE VENDOR 
+Route::resource('/vendor/produk', ProductController::class);
+Route::get('/vendor/toko', [ShopController::class, 'index']);
 
 // ROUTE ADMIN
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('kategori', CategoryController::class);
 Route::resource('user', UserController::class);
+Route::resource('manage-blog', BlogController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
