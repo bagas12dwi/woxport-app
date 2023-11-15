@@ -6,17 +6,12 @@
             <div class="col-md-6 col-sm-12">
                 <div id="carouselExample" class="carousel slide">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ URL::asset('assets/images/categori-a.jpg') }}" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ URL::asset('assets/images/categori-a.jpg') }}" class="d-block w-100"
-                                alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ URL::asset('assets/images/categori-a.jpg') }}" class="d-block w-100"
-                                alt="...">
-                        </div>
+                        @foreach ($vendor->imageProduct as $image)
+                            <div class="carousel-item active">
+                                <img src="{{ URL::asset('storage/' . $image->img_path) }}" class="d-block w-100"
+                                    style="object-fit: cover;" alt="...">
+                            </div>
+                        @endforeach
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
                         data-bs-slide="prev">
@@ -32,14 +27,15 @@
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="d-flex">
-                    <h3 class="fw-bold">Glamour Wedding</h3>
+                    <h3 class="fw-bold">{{ $vendor->product_name }}</h3>
                     <form action="">
                         <button class="btn btn-primary ms-2"><i class="bi bi-heart"></i></button>
                     </form>
                 </div>
                 <hr>
-                <h5 class="fw-bold text-primary">Rp. 100.000 <span class="text-decoration-line-through text-dark">Rp.
-                        200.000</span></h5>
+                <h5 class="fw-bold text-primary">Rp. {{ $vendor->price }} <span
+                        class="text-decoration-line-through text-dark">Rp.
+                        {{ $vendor->price + 100000 }}</span></h5>
                 <div class="d-flex text-warning">
                     <i class="bi bi-star-fill"></i>
                     <i class="bi bi-star-fill"></i>
@@ -49,10 +45,7 @@
                     <p class="ms-2 text-dark">(5 Customer review)</p>
                 </div>
                 <hr>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi saepe veritatis voluptas tenetur
-                    voluptatum, iusto quod sequi consectetur velit illo neque earum a quibusdam rem animi corrupti nemo
-                    numquam! Deserunt est sit quo sapiente perferendis iusto voluptatem, at ea vero facilis? Ipsam quasi
-                    accusamus fuga illo, soluta aut? Quae, reiciendis.</p>
+                <p class="text-truncate">{{ $vendor->description }} </p>
                 <form action="#">
                     <div class="d-flex">
                         <div class="mb-3">
@@ -80,15 +73,8 @@
             </ul>
             <div class="tab-content" id="myTabsContent">
                 <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
-                    <h3 class="mt-3">Glamour Wedding</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro quam voluptates aliquid, ab iure,
-                        temporibus tenetur totam eligendi magni qui est debitis nemo eos ex quaerat recusandae ducimus
-                        deleniti cum praesentium iste incidunt. Et culpa fugiat, nobis aspernatur natus at fugit, alias
-                        praesentium beatae nemo dolorem adipisci reiciendis! Nostrum quod aut nisi cum illo maxime aperiam
-                        inventore cupiditate ipsam eos rem, eligendi iste, delectus fuga, eveniet quibusdam neque. Repellat
-                        facere molestiae soluta. Repellat laudantium at, consequatur, voluptatem animi perspiciatis earum
-                        amet fugiat sint natus ipsa possimus quo totam a voluptas iusto dolore atque hic magni ducimus quae
-                        consequuntur esse enim.</p>
+                    <h3 class="mt-3">{{ $vendor->product_name }}</h3>
+                    <p>{{ $vendor->description }}</p>
                 </div>
                 <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                     <div class="d-flex my-3">

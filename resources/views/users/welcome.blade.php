@@ -50,83 +50,44 @@
         <div class="container text-center">
             <h1 class="text-uppercase text-primary fw-bold mb-3">Our <span class="text-dark">Categories </span></h1>
             <div class="row g-2">
-                <div class="col-lg-4 col-md-6">
-                    <div class="card mx-auto" style="width: 18rem;">
-                        <img src="{{ URL::asset('/assets/images/categori-a.jpg') }}" class="card-img-top" alt="vendor"
-                            style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Vendor</h5>
+                @foreach ($categories as $category)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card mx-auto" style="width: 18rem;">
+                            <img src="{{ URL::asset('storage/' . $category->img_path) }}" class="card-img-top"
+                                alt="vendor" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">{{ $category->category_name }}</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card mx-auto" style="width: 18rem;">
-                        <img src="{{ URL::asset('/assets/images/categori-b.avif') }}" class="card-img-top" alt="package"
-                            style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Venue</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card mx-auto" style="width: 18rem;">
-                        <img src="{{ URL::asset('/assets/images/categori-c.jpg') }}" class="card-img-top" alt="package"
-                            style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Package</h5>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <section id="rekomendasi" class="my-5">
-        <div class="container text-center">
-            <h1 class="text-uppercase text-primary fw-bold mb-3">Top <span class="text-dark">recommendation</span></h1>
-            <div class="row g-2">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card mx-auto bg-white border-0 shadow" style="width: 16rem;">
-                        <img src="{{ URL::asset('/assets/images/rec-1.jpg') }}" class="card-img-top img-fluid"
-                            alt="Glamour Wedding" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-uppercase">Glamour Wedding</h5>
+    @if (count($products) > 0)
+        <section id="rekomendasi" class="my-5">
+            <div class="container text-center">
+                <h1 class="text-uppercase text-primary fw-bold mb-3">Top <span class="text-dark">recommendation</span></h1>
+                <div class="row g-2">
+                    @foreach ($products as $product)
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card mx-auto bg-white border-0 shadow" style="width: 16rem;">
+                                <img src="{{ URL::asset('/storage/' . $product->img_path) }}" class="card-img-top img-fluid"
+                                    alt="Glamour Wedding" style="height: 200px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold text-uppercase">{{ $product->product_name }}</h5>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card mx-auto bg-white border-0 shadow" style="width: 16rem;">
-                        <img src="{{ URL::asset('/assets/images/rec-2.jpg') }}" class="card-img-top img-fluid"
-                            alt="Dream Mua" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-uppercase">Dream Mua</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card mx-auto bg-white border-0 shadow" style="width: 16rem;">
-                        <img src="{{ URL::asset('/assets/images/rec-3.jpg') }}" class="card-img-top" alt="Abphotography"
-                            style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-uppercase">Abphotography</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="card mx-auto bg-white border-0 shadow" style="width: 16rem;">
-                        <img src="{{ URL::asset('/assets/images/rec-4.jpg') }}" class="card-img-top"
-                            alt="Mommy Cathering" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold text-uppercase">Mommy Cathering</h5>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
 
-    <section id="kontak" class="mb-3">
+    <section id="kontak" class="my-3">
         <div class="container text-center">
             <h1 class="text-uppercase text-primary fw-bold mb-3">Contact <span class="text-dark">Us</span></h1>
             <div class="row">
@@ -140,8 +101,8 @@
                     <form action="#">
                         <div class="mb-3 text-start">
                             <label for="name" class="form-label">Nama</label>
-                            <input type="text" class="form-control" name="name" id="name"
-                                aria-describedby="name" placeholder="Nama Lengkap">
+                            <input type="text" class="form-control" name="name" id="name" aria-describedby="name"
+                                placeholder="Nama Lengkap">
                         </div>
                         <div class="mb-3 text-start">
                             <label for "email" class="form-label">Email</label>

@@ -20,7 +20,7 @@
                 @endif
 
                 <main class="form-signin">
-                    <form action="/login" method="POST">
+                    <form action="{{ url('/login') }}" method="POST">
                         @csrf
                         <div class="text-center">
                             <img class="mb-4" src="/asssets/img/logo-hitam.png" alt="" width="100">

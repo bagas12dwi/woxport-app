@@ -16,8 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::with('imageProduct')->where('user_id', '=', 1)->get();
-        // dd($product);
+        $product = Product::with('imageProduct')->where('user_id', '=', auth()->user()->id)->get();
         return view('vendor.produk.index', [
             'title' => 'Produk',
             'product' => $product
@@ -48,7 +47,7 @@ class ProductController extends Controller
             'description' => 'required'
         ]);
 
-        $validatedData['user_id'] = 1;
+        $validatedData['user_id'] = auth()->user()->id;
         try {
             $product = Product::create($validatedData);
             $product_id = $product->id;
@@ -102,7 +101,7 @@ class ProductController extends Controller
             'description' => 'required'
         ]);
 
-        $validatedData['user_id'] = 1;
+        $validatedData['user_id'] = auth()->user()->id;
 
         try {
             // Temukan produk yang ingin diperbarui berdasarkan ID

@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-4">
                 <main class="form-signin">
-                    <form action="/register" method="POST">
+                    <form action="{{ url('/register') }}" method="POST">
                         @csrf
                         <div class="text-center">
                             <img class="mb-4" src="/asssets/img/logo-hitam.png" alt="" width="100">

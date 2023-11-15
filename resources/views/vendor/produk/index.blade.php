@@ -35,42 +35,53 @@
             <i class="bi bi-plus-circle-fill me-2"></i>Tambahkan {{ $title }}
         </a>
         <div class="row g-4 mt-2">
-            @foreach ($product as $item)
-                <div class="col-md-4 col-sm-12">
-                    <div class="card bg-white shadow border-0 card-product">
-                        @if (count($item->imageProduct) > 0)
-                            <img src="{{ URL::asset('storage/' . $item->imageProduct[0]->img_path) }}" class="card-img-top"
-                                alt="Image" style="height: 200px; object-fit: cover;">
-                        @else
-                            <img src="{{ URL::asset('/assets/images/wo.jpg') }}" class="card-img-top" alt="Image"
-                                style="height: 200px; object-fit: cover;">
-                        @endif
 
-                        <div class="card-body">
-                            <div
-                                class="btn-product text-center flex-column align-items-center justify-content-center text-white rounded">
+            @if (count($product) > 0)
+                @foreach ($product as $item)
+                    <div class="col-md-4 col-sm-12">
+                        <div class="card bg-white shadow border-0 card-product">
+                            @if (count($item->imageProduct) > 0)
+                                <img src="{{ URL::asset('storage/' . $item->imageProduct[0]->img_path) }}"
+                                    class="card-img-top" alt="Image" style="height: 200px; object-fit: cover;">
+                            @else
+                                <img src="{{ URL::asset('/assets/images/wo.jpg') }}" class="card-img-top" alt="Image"
+                                    style="height: 200px; object-fit: cover;">
+                            @endif
 
-                                <form action="{{ url('vendor/produk/' . $item->id) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button href="" class="btn btn-danger mb-3" data-toggle="tooltip"
-                                        data-original-title="Hapus" onclick="return confirm('Apakah anda yakin?')">
-                                        <i class="bi bi-trash3-fill"></i> Hapus
-                                    </button>
-                                </form>
-                                <a href="{{ url('vendor/produk/' . $item->id . '/edit') }}" class="btn btn-light">
-                                    <i class="bi bi-pencil-fill"></i> Edit
-                                </a>
+                            <div class="card-body">
+                                <div
+                                    class="btn-product text-center flex-column align-items-center justify-content-center text-white rounded">
+
+                                    <form action="{{ url('vendor/produk/' . $item->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button href="" class="btn btn-danger mb-3" data-toggle="tooltip"
+                                            data-original-title="Hapus" onclick="return confirm('Apakah anda yakin?')">
+                                            <i class="bi bi-trash3-fill"></i> Hapus
+                                        </button>
+                                    </form>
+                                    <a href="{{ url('vendor/produk/' . $item->id . '/edit') }}" class="btn btn-light">
+                                        <i class="bi bi-pencil-fill"></i> Edit
+                                    </a>
+                                </div>
+                                <h5 class="card-title fw-bold text-primary text-center">Rp. {{ $item->price }} <span
+                                        class="text-decoration-line-through fs-6 text-dark">Rp.
+                                        {{ $item->price + 100000 }}</span></h5>
+                                <p class="card-text text-center">{{ $item->product_name }}</p>
+
                             </div>
-                            <h5 class="card-title fw-bold text-primary text-center">Rp. {{ $item->price }} <span
-                                    class="text-decoration-line-through fs-6 text-dark">Rp.
-                                    {{ $item->price + 100000 }}</span></h5>
-                            <p class="card-text text-center">{{ $item->product_name }}</p>
-
                         </div>
                     </div>
+                @endforeach
+            @else
+                <div class="col-12 text-center d-flex align-items-center justify-content-center">
+                    <div>
+                        <img class="img-fluid w-75" src="{{ URL::asset('/assets/images/404.svg') }}" alt="404 not found">
+                        <h1 class="mt-5">Belum ada <span class="fw-bolder text-primary">produk!</span></h1>
+                        <p class="lead my-4">Belum ada produk yang ditambahkan, <br> Silahkan tambahkan produk baru!</p>
+                    </div>
                 </div>
-            @endforeach
+            @endif
         </div>
     </div>
 @endsection

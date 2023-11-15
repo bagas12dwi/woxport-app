@@ -25,53 +25,71 @@
                     <a class="nav-link fs-5" aria-current="page" href="{{ url('contact') }}">Contact Us</a>
                 </li>
             </ul>
-            <ul class="navbar-nav me-2">
-                <li class="nav-item">
-                    <a href="{{ url('cart') }}" class="nav-link fs-5">
-                        <i class="bi bi-cart fs-5 ms-2"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('wishlist') }}" class="nav-link fs-5">
-                        <i class="bi bi-heart fs-5 ms-2"></i>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="bi bi-person-circle fs-5 ms-2"></i>
-                    </a>
-                    <ul class="dropdown-menu bg-white border-0 shadow-sm">
-                        <li><a class="dropdown-item" href="{{ url('profile') }}">
-                                <i class="bi bi-person-circle me-2"></i>
-                                Profile</a></li>
-                        <li>
-                        <li><a class="dropdown-item" href="{{ url('change-password') }}">
-                                <i class="bi bi-key me-2"></i>
-                                Change Password</a></li>
-                        <li>
-                        <li>
-                            <hr class="dropdown-divider mx-2">
-                        </li>
-                        <li><a class="dropdown-item" href="{{ url('vendor/toko') }}">
-                                <i class="bi bi-shop me-2"></i>
-                                Toko
-                            </a>
-                        </li>
-                        <li><a class="dropdown-item" href="{{ url('vendor/produk') }}">
-                                <i class="bi bi-basket3-fill me-2"></i>
-                                Produk
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider mx-2">
-                        </li>
-                        <li><a class="dropdown-item" href="#">
-                                <i class="bi bi-box-arrow-left me-2"></i>Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <a href="{{ url('login') }}" class="btn btn-primary me-2" type="submit">Login</a>
+            @auth
+                <ul class="navbar-nav me-2">
+                    <li class="nav-item">
+                        <a href="{{ url('cart') }}" class="nav-link fs-5">
+                            <i class="bi bi-cart fs-5 ms-2"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('wishlist') }}" class="nav-link fs-5">
+                            <i class="bi bi-heart fs-5 ms-2"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-person-circle fs-5 mx-2"></i> <span class="fs-6 m-0">
+                                {{ auth()->user()->name }}</span>
+                        </a>
+                        <ul class="dropdown-menu bg-white border-0 shadow-sm">
+                            <li><a class="dropdown-item" href="{{ url('profile') }}">
+                                    <i class="bi bi-person-circle me-2"></i>
+                                    Profile</a></li>
+                            <li>
+                            <li><a class="dropdown-item" href="{{ url('change-password') }}">
+                                    <i class="bi bi-key me-2"></i>
+                                    Change Password</a></li>
+                            <li>
+                            <li>
+                                <hr class="dropdown-divider mx-2">
+                            </li>
+                            @if (auth()->user()->role == 'vendor')
+                                <li><a class="dropdown-item" href="{{ url('vendor/toko') }}">
+                                        <i class="bi bi-shop me-2"></i>
+                                        Toko
+                                    </a>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ url('vendor/produk') }}">
+                                        <i class="bi bi-basket3-fill me-2"></i>
+                                        Produk
+                                    </a>
+                                </li>
+                            @else
+                                <li><a class="dropdown-item" href="{{ url('vendor/') }}">
+                                        <i class="bi bi-shop me-2"></i>
+                                        Daftar Toko
+                                    </a>
+                                </li>
+                            @endif
+                            <li>
+                                <hr class="dropdown-divider mx-2">
+                            </li>
+                            <li>
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-left me-2"></i>Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            @else
+                <a href="{{ url('login') }}" class="btn btn-primary me-2" type="submit">Login</a>
+            @endauth
         </div>
     </div>
 </nav>
