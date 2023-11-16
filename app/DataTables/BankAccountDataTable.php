@@ -2,9 +2,8 @@
 
 namespace App\DataTables;
 
-use App\Models\Blog;
+use App\Models\BankAccount;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Facades\URL;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -13,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class BlogDataTable extends DataTable
+class BankAccountDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,24 +22,18 @@ class BlogDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function ($blog) {
-                return view('admin.blog.action', compact('blog'));
-            })
-            ->addColumn('image', function ($query) {
-                return '<img src="' . URL::asset('storage/' . $query->img_path) . '" style="height: 100px; width: 100px; object-fit: cover;">';
-            })
-            ->addColumn('body', function ($query) {
-                return '<div style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;">' . $query->body . '</div>';
+            ->addColumn('action', function ($bank) {
+                return view('admin.bank.action', compact('bank'));
             })
             ->addIndexColumn()
             ->setRowId('id')
-            ->rawColumns(['image', 'action', 'body']);
+            ->rawColumns(['action']);
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Blog $model): QueryBuilder
+    public function query(BankAccount $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -51,9 +44,10 @@ class BlogDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('blog-table')
+            ->setTableId('bankaccount-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            //->dom('Bfrtip')
             ->orderBy(1)
             ->selectStyleSingle();
     }
@@ -65,9 +59,7 @@ class BlogDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')->title('No. ')->searchable(false)->orderable(false)->width(10),
-            Column::computed('image')->title('Gambar')->width(150),
-            Column::make('title')->title('Judul'),
-            Column::computed('body')->title('Isi'),
+            Column::make('bank_name')->title('Nama Bank'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -81,6 +73,6 @@ class BlogDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Blog_' . date('YmdHis');
+        return 'BankAccount_' . date('YmdHis');
     }
 }

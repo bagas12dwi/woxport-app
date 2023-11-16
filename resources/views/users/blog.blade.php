@@ -11,10 +11,14 @@
                             <img src="{{ URL::asset('/storage/' . $blog->img_path) }}" class="card-img-top" alt=""
                                 style="height: 300px; object-fit: cover;">
                             <div class="card-body">
-                                <h5 class="card-title"> {{ $blog->title }} </h5>
-                                <p class="card-text text-truncate">{{ $blog->body }}</p>
-                                <a href="{{ url('blog/detail') }}" class="btn btn-primary">Read More</a>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                                <h5 class="card-title fw-bold"> {{ $blog->title }} </h5>
+                                <div
+                                    style="max-width: 400px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    <p class="card-text">{!! $blog->body !!}</p>
+                                </div>
+                                <a href="{{ url('blog/detail/' . $blog->id) }}" class="btn btn-primary">Read More</a>
+                                <p class="card-text"><small class="text-body-secondary">Last updated
+                                        {{ $blog->updated_at->diffForHumans() }}</small></p>
                             </div>
                         </div>
                     </div>

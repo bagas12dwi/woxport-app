@@ -64,9 +64,9 @@
                                         <i class="bi bi-pencil-fill"></i> Edit
                                     </a>
                                 </div>
-                                <h5 class="card-title fw-bold text-primary text-center">Rp. {{ $item->price }} <span
+                                <h5 class="card-title fw-bold text-primary text-center">@currency($item->price) <span
                                         class="text-decoration-line-through fs-6 text-dark">Rp.
-                                        {{ $item->price + 100000 }}</span></h5>
+                                        @currency($item->price + 100000) </span></h5>
                                 <p class="card-text text-center">{{ $item->product_name }}</p>
 
                             </div>

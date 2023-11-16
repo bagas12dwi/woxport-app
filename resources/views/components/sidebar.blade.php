@@ -84,6 +84,14 @@
                     <span class="sidebar-text">Blog</span>
                 </a>
             </li>
+            <li class="nav-item {{ $title == 'Bank Account' ? 'active' : '' }}">
+                <a href="{{ url('manage-bank') }}" class="nav-link">
+                    <span class="sidebar-icon">
+                        <i class="bi bi-wallet fs-5"></i>
+                    </span>
+                    <span class="sidebar-text">Bank Account</span>
+                </a>
+            </li>
             <li class="nav-item {{ $title == 'User' ? 'active' : '' }}">
                 <a href="{{ url('user') }}" class="nav-link">
                     <span class="sidebar-icon">

@@ -10,19 +10,24 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link fs-5 active" aria-current="page" href="{{ url('/') }}">Home</a>
+                    <a class="nav-link fs-5 {{ $title == 'Home' ? 'active' : '' }}" aria-current="page"
+                        href="{{ url('/') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" aria-current="page" href="{{ url('about') }}">About</a>
+                    <a class="nav-link fs-5 {{ $title == 'About' ? 'active' : '' }}" aria-current="page"
+                        href="{{ url('about') }}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" aria-current="page" href="{{ url('product') }}">Product</a>
+                    <a class="nav-link fs-5 {{ $title == 'Product' ? 'active' : '' }}" aria-current="page"
+                        href="{{ url('product') }}">Product</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" aria-current="page" href="{{ url('blog') }}">Blog</a>
+                    <a class="nav-link fs-5 {{ $title == 'Blog' ? 'active' : '' }}" aria-current="page"
+                        href="{{ url('blog') }}">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" aria-current="page" href="{{ url('contact') }}">Contact Us</a>
+                    <a class="nav-link fs-5 {{ $title == 'Contact Us' ? 'active' : '' }}" aria-current="page"
+                        href="{{ url('contact') }}">Contact Us</a>
                 </li>
             </ul>
             @auth
@@ -67,7 +72,7 @@
                                     </a>
                                 </li>
                             @else
-                                <li><a class="dropdown-item" href="{{ url('vendor/') }}">
+                                <li><a class="dropdown-item" href="{{ url('vendor/daftar-toko') }}">
                                         <i class="bi bi-shop me-2"></i>
                                         Daftar Toko
                                     </a>

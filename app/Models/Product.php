@@ -19,4 +19,19 @@ class Product extends Model
     {
         return $this->hasMany('\App\Models\ImageProduct');
     }
+
+    public function wishlist()
+    {
+        return $this->belongsTo('\App\Models\Wishlist');
+    }
+
+    public function vendor()
+    {
+        return $this->belongsTo('\App\Models\Vendor');
+    }
+
+    public function cart()
+    {
+        return $this->belongsTo('\App\Models\Cart');
+    }
 }

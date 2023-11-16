@@ -56,8 +56,8 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">{{ $product->product_name }} </h5>
-                                <p class="card-text text-ellipsis"> {{ $product->description }} </p>
-                                <p class="card-text fs-4"><small class="text-body-secondary">Rp. {{ $product->price }}
+                                <p class="card-text text-truncate"> {{ $product->description }} </p>
+                                <p class="card-text fs-4"><small class="text-body-secondary">@currency($product->price)
                                     </small>
                                 </p>
                                 <div class="d-flex text-start justify-content-end w-full">

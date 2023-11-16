@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\ImageProduct;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -16,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::with('imageProduct')->where('user_id', '=', auth()->user()->id)->get();
+        $vendor = Vendor::where('user_id', auth()->user()->id)->first();
+        $product = Product::with('imageProduct')->where('vendor_id', '=', $vendor->id)->get();
         return view('vendor.produk.index', [
             'title' => 'Produk',
             'product' => $product
@@ -47,7 +49,9 @@ class ProductController extends Controller
             'description' => 'required'
         ]);
 
-        $validatedData['user_id'] = auth()->user()->id;
+        $vendor = Vendor::where('user_id', auth()->user()->id)->first();
+
+        $validatedData['vendor_id'] = $vendor->id;
         try {
             $product = Product::create($validatedData);
             $product_id = $product->id;
@@ -61,7 +65,6 @@ class ProductController extends Controller
                 }
             }
         } catch (\Throwable $th) {
-            dd($th);
             return redirect()->intended('vendor/produk')->with('error', 'Data Gagal Ditambahkan !');
         }
 
@@ -101,7 +104,9 @@ class ProductController extends Controller
             'description' => 'required'
         ]);
 
-        $validatedData['user_id'] = auth()->user()->id;
+        $vendor = Vendor::where('user_id', auth()->user()->id)->first();
+
+        $validatedData['vendor_id'] = $vendor->id;
 
         try {
             // Temukan produk yang ingin diperbarui berdasarkan ID

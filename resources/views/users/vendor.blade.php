@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="container my-3">
-        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Our <span class="text-dark">Wedding</span> Vendor
+        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Our <span class="text-dark">Vendor</span>
         </h1>
         <div class="row g-4">
             @if (count($vendor) > 0)
@@ -19,15 +19,21 @@
                             <div class="card-body">
                                 <div
                                     class="btn-product text-center flex-column align-items-center justify-content-center text-white rounded">
-
-                                    <a href="#" class="btn btn-primary mb-2">Add To Cart</a>
+                                    <form action="{{ url('/cart') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="qty" value="1">
+                                        <input type="hidden" name="product_id" value="{{ $vendor->id }}">
+                                        <button type="submit" class="btn btn-primary mb-2">Add to
+                                            Cart</button>
+                                    </form>
                                     <a href="{{ url('vendor/detail/' . $vendor->id) }}" class="btn btn-light">Show
                                         Details</a>
                                 </div>
-                                <h5 class="card-title fw-bold text-primary text-center">Rp. {{ $vendor->price }} <span
-                                        class="text-decoration-line-through fs-6 text-dark">Rp.
-                                        {{ $vendor->price + 100000 }}
-                                    </span></h5>
+                                <h5 class="card-title fw-bold text-primary text-center">@currency($vendor->price)
+                                    <span class="text-decoration-line-through fs-6 text-dark">Rp.
+                                        @currency($vendor->price + 100000)
+                                    </span>
+                                </h5>
                                 <p class="card-text text-center">{{ $vendor->product_name }}</p>
                             </div>
                         </div>

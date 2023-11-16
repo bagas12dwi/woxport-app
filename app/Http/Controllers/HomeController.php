@@ -13,6 +13,7 @@ class HomeController extends Controller
         $kategori = Category::orderBy('created_at', 'desc')->limit(3)->get();
         $produk = Product::with('imageProduct')->orderBy('created_at', 'desc')->limit(4)->get();
         return view('users.welcome', [
+            'title' => 'Home',
             'categories' => $kategori,
             'products' => $produk
         ]);

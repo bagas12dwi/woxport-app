@@ -17,9 +17,9 @@ return new class extends Migration
             $table->text('description');
             $table->double('price');
             $table->foreignId('category_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
-            $table->foreignId('user_id')
+            $table->foreignId('vendor_id')
                 ->nullable()
-                ->constrained('users')
+                ->constrained('vendors')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->timestamps();
