@@ -11,20 +11,33 @@
                             Alamat
                         </h5>
                         <hr>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos, quam maiores sequi quas
-                            consequatur consequuntur voluptas magni corporis illo sapiente.</p>
+                        @if (auth()->user()->address == null)
+                            <a href="{{ url('/profile') }}" class="btn btn-primary btn-sm">Tambahkan Alamat</a>
+                        @else
+                            <p>{{ auth()->user()->address }}</p>
+                            <a href="{{ url('/profile') }}" class="btn btn-primary btn-sm">Edit Alamat</a>
+                        @endif
                         <hr>
                         <div class="card bg-white border-0">
-                            <div class="card-body">
-                                <div class="d-flex">
-                                    <img src="{{ URL::asset('assets/images/rec-1.jpg') }}" class="rounded" alt=""
-                                        style="width: 200px; object-fit: cover">
-                                    <div class="d-flex flex-column ms-2">
-                                        <h5 class="card-title fw-bold">Glamour Wedding</h5>
-                                        <p class="card-text">Rp. 100.000</p>
+                            @foreach ($payment->paymentDetail as $paymentDetail)
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        @if (count($paymentDetail->product->imageProduct) > 0)
+                                            <img src="{{ URL::asset('storage/' . $paymentDetail->product->imageProduct[0]->img_path) }}"
+                                                class="card-img-top" alt="Image"
+                                                style="width: 200px; object-fit: cover;">
+                                        @else
+                                            <img src="{{ URL::asset('/assets/images/wo.jpg') }}" class="card-img-top"
+                                                alt="Image" style="width: 200px; object-fit: cover;">
+                                        @endif
+                                        <div class="d-flex flex-column ms-2">
+                                            <h5 class="card-title fw-bold">{{ $paymentDetail->product->product_name }}
+                                            </h5>
+                                            <p class="card-text">@currency($paymentDetail->product->price)</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -35,27 +48,33 @@
                         <h5 class="card-title fw-bold mb-3">
                             Ringkasan Pesanan
                         </h5>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="text-muted">Harga Barang (1 Barang)</h6>
-                            <h6 class="text-muted">Rp. 100.000</h6>
-                        </div>
+                        <p class="fw-bold">No. Pemnayaran : {{ $payment->order_number }}</p>
+                        @foreach ($payment->paymentDetail as $paymentDetail)
+                            <div class="d-flex justify-content-between">
+                                <h6 class="text-muted">Harga Barang ({{ $paymentDetail->qty }} Barang)</h6>
+                                <h6 class="text-muted">@currency($paymentDetail->price)</h6>
+                            </div>
+                        @endforeach
                         <hr>
                         <div class="d-flex justify-content-between mb-3">
                             <h6 class="fw-bold">Total Harga</h6>
-                            <h6 class="fw-bold">Rp. 100.000</h6>
+                            <h6 class="fw-bold">@currency($payment->total_price)</h6>
                         </div>
                         <hr>
                         <h6 class="fw-bold">Pembayaran</h6>
                         <div class="card border-0 mb-3">
                             <div class="card-body">
+                                <h6 class="fw-bold">Nama Vendor : {{ $payment->vendor->vendor_name }}</h6>
                                 <div class="d-flex align-items-center">
                                     <i class="bi bi-wallet fs-4"></i>
-                                    <h6 class="ms-3">0930239023 <br>(BCA) </h6>
+                                    <h6 class="ms-3">{{ $payment->vendor->bank_account_number }}
+                                        <br>({{ $payment->vendor->bankAccount->bank_name }})
+                                    </h6>
                                 </div>
                             </div>
                         </div>
                         <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
+                            data-bs-target="#exampleModal" {{ auth()->user()->address == null ? 'disabled' : '' }}>
                             Bayar
                         </button>
                     </div>
@@ -73,12 +92,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form action="{{ url('/payment/' . $payment->order_number) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('put')
                     <div class="mb-3">
-                        <label for="file" class="form-label">Upload Bukti Pembayaran</label>
-                        <input type="file" class="form-control" name="file" id="file"
-                            placeholder="Upload Bukti Pembayaran" aria-describedby="fileHelpId">
-                        <div id="fileHelpId" class="form-text">Upload Bukti Pembayaran</div>
+                        <label for="proof_of_payment" class="form-label">Upload Bukti Pembayaran</label>
+                        <input type="file" class="form-control" name="proof_of_payment" id="proof_of_payment"
+                            placeholder="Upload Bukti Pembayaran" aria-describedby="proof_of_paymentHelpId">
+                        <div id="proof_of_paymentHelpId" class="form-text">Upload Bukti Pembayaran</div>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -34,4 +34,9 @@ class Product extends Model
     {
         return $this->belongsTo('\App\Models\Cart');
     }
+
+    public function paymentDetail()
+    {
+        return $this->belongsTo('\App\Models\PaymentDetail');
+    }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\User\BlogController as UserBlogController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\ProductController as UserProductController;
 use App\Http\Controllers\User\VendorController;
 use App\Http\Controllers\User\WishlistController;
@@ -49,14 +50,19 @@ Route::resource('/wishlist', WishlistController::class);
 Route::delete('/unlike/{wishlist}', [WishlistController::class, 'unlike']);
 Route::resource('/cart', CartController::class);
 Route::resource('vendor/daftar-toko', ControllersVendorController::class);
+Route::post('/payment/store', [PaymentController::class, 'store']);
+Route::get('/payment/{order_number}', [PaymentController::class, 'index']);
+Route::put('/payment/{order_number}', [PaymentController::class, 'update']);
 Route::get('/profile', function () {
     return view('users.profile', ['title' => "Profile"]);
 });
 Route::get('/change-password', function () {
     return view('users.change-password');
 });
-Route::get('/payment', function () {
-    return view('users.confirm-payment');
+Route::get('/success', function () {
+    return view('users.success-payment', [
+        'title' => 'Success'
+    ]);
 });
 
 // Route Auth

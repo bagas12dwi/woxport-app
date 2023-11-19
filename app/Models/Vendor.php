@@ -20,4 +20,14 @@ class Vendor extends Model
     {
         return $this->belongsTo('\App\Models\User');
     }
+
+    public function bankAccount()
+    {
+        return $this->belongsTo('\App\Models\BankAccount');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo('\App\Models\Payment');
+    }
 }

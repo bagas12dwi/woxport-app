@@ -99,9 +99,9 @@
                                 <h6 class="fw-bold">Total Harga</h6>
                                 <h6 class="fw-bold total-harga-barang">Rp. 0</h6>
                             </div>
-                            <a href="{{ url('payment') }}" class="btn btn-primary w-100">
+                            <button class="btn btn-primary w-100 disabled">
                                 Beli (0)
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -139,6 +139,11 @@
                     'id-ID')); // Use 'id-ID' for Indonesian locale
                 $('.total-harga-barang').text('Rp. ' + totalHarga.toLocaleString('id-ID'));
                 $('.btn-primary').text('Beli (' + totalChecked + ')');
+                if (totalChecked != 0) {
+                    $('.btn-primary').removeClass('disabled');
+                } else {
+                    $('.btn-primary').addClass('disabled');
+                }
             }
 
             $('.checkCart').change(function() {
@@ -178,6 +183,32 @@
 
             // Initialize on page load
             updateSummary();
+
+            $('.btn-primary').click(function() {
+                var checkedCarts = $('.checkCart:checked');
+                var cartIds = [];
+
+                checkedCarts.each(function() {
+                    var cartId = $(this).attr('id').split('_')[1];
+                    cartIds.push(cartId);
+                });
+
+                // Send an AJAX request to store the payment
+                $.ajax({
+                    url: '{{ url('payment/store') }}',
+                    type: 'POST',
+                    data: {
+                        cart_ids: cartIds,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        window.location.href = '/payment/' + response.order_number;
+                    },
+                    error: function(error) {
+                        console.error('AJAX Error:', error);
+                    }
+                });
+            });
         });
     </script>
 @endpush

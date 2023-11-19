@@ -73,8 +73,9 @@
                     @foreach ($products as $product)
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="card mx-auto bg-white border-0 shadow" style="width: 16rem;">
-                                <img src="{{ URL::asset('/storage/' . $product->img_path) }}" class="card-img-top img-fluid"
-                                    alt="Glamour Wedding" style="height: 200px; object-fit: cover;">
+                                <img src="{{ URL::asset('/storage/' . $product->imageProduct[0]->img_path) }}"
+                                    class="card-img-top img-fluid" alt="Glamour Wedding"
+                                    style="height: 200px; object-fit: cover;">
                                 <div class="card-body">
                                     <h5 class="card-title fw-bold text-uppercase">{{ $product->product_name }}</h5>
                                 </div>
