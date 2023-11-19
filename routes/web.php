@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\User\BlogController as UserBlogController;
 use App\Http\Controllers\User\CartController;
@@ -53,9 +54,8 @@ Route::resource('vendor/daftar-toko', ControllersVendorController::class);
 Route::post('/payment/store', [PaymentController::class, 'store']);
 Route::get('/payment/{order_number}', [PaymentController::class, 'index']);
 Route::put('/payment/{order_number}', [PaymentController::class, 'update']);
-Route::get('/profile', function () {
-    return view('users.profile', ['title' => "Profile"]);
-});
+Route::get('/profile', [ProfileController::class, 'index']);
+Route::put('/profile/{user}', [ProfileController::class, 'update']);
 Route::get('/change-password', function () {
     return view('users.change-password');
 });
