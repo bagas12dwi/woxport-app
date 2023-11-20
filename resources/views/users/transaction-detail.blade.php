@@ -2,7 +2,10 @@
 
 @section('konten')
     <div class="container my-3">
-        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Checkout</h1>
+        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Detail <span class="text-dark">Transaksi</span></h1>
+        <a href="{{ url('/daftar-transaksi') }}" class="btn btn-primary mb-3">
+            <i class="bi bi-arrow-left"></i> Kembali
+        </a>
         <div class="row g-3">
             <div class="col-md-8 col-sm-6">
                 <div class="card shadow border-0 bg-white p-3">
@@ -11,11 +14,15 @@
                             Alamat
                         </h5>
                         <hr>
-                        @if (auth()->user()->address == null)
-                            <a href="{{ url('/profile') }}" class="btn btn-primary btn-sm">Tambahkan Alamat</a>
+                        @if ($payment->status == 'Belum Dibayar')
+                            @if (auth()->user()->address == null)
+                                <a href="{{ url('/profile') }}" class="btn btn-primary btn-sm">Tambahkan Alamat</a>
+                            @else
+                                <p>{{ auth()->user()->address }}</p>
+                                <a href="{{ url('/profile') }}" class="btn btn-primary btn-sm">Edit Alamat</a>
+                            @endif
                         @else
                             <p>{{ auth()->user()->address }}</p>
-                            <a href="{{ url('/profile') }}" class="btn btn-primary btn-sm">Edit Alamat</a>
                         @endif
                         <hr>
                         <div class="card bg-white border-0">
@@ -45,6 +52,15 @@
             <div class="col-md-4 col-sm-6">
                 <div class="card bg-white shadow border-0">
                     <div class="card-body">
+                        @if ($payment->status == 'Belum Dibayar')
+                            <span class="badge text-bg-info fs-6 mb-3">{{ $payment->status }}</span>
+                        @elseif ($payment->status == 'Menunggu Konfirmasi')
+                            <span class="badge text-bg-warning fs-6 mb-3">{{ $payment->status }}</span>
+                        @elseif ($payment->status == 'Disetujui')
+                            <span class="badge text-bg-success fs-6 mb-3">{{ $payment->status }}</span>
+                        @elseif ($payment->status == 'Gagal')
+                            <span class="badge text-bg-danger fs-6 mb-3">{{ $payment->status }}</span>
+                        @endif
                         <h5 class="card-title fw-bold mb-3">
                             Ringkasan Pesanan
                         </h5>
@@ -79,10 +95,12 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal" {{ auth()->user()->address == null ? 'disabled' : '' }}>
-                            Bayar
-                        </button>
+                        @if ($payment->status == 'Belum Dibayar')
+                            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" {{ auth()->user()->address == null ? 'disabled' : '' }}>
+                                Bayar
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>

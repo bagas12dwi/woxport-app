@@ -13,6 +13,7 @@ use App\Http\Controllers\User\BlogController as UserBlogController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\ProductController as UserProductController;
+use App\Http\Controllers\User\TransactionListController;
 use App\Http\Controllers\User\VendorController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\UserController;
@@ -56,6 +57,8 @@ Route::get('/payment/{order_number}', [PaymentController::class, 'index']);
 Route::put('/payment/{order_number}', [PaymentController::class, 'update']);
 Route::get('/profile', [ProfileController::class, 'index']);
 Route::put('/profile/{user}', [ProfileController::class, 'update']);
+Route::get('/daftar-transaksi', [TransactionListController::class, 'index']);
+Route::get('/daftar-transaksi/detail/{order_number}', [TransactionListController::class, 'detail']);
 Route::get('/change-password', function () {
     return view('users.change-password');
 });

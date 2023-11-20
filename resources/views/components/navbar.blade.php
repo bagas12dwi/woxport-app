@@ -57,6 +57,10 @@
                                     <i class="bi bi-key me-2"></i>
                                     Change Password</a></li>
                             <li>
+                            <li><a class="dropdown-item" href="{{ url('daftar-transaksi') }}">
+                                    <i class="bi bi-card-list me-2"></i>
+                                    Daftar Transaksi</a></li>
+                            <li>
                             <li>
                                 <hr class="dropdown-divider mx-2">
                             </li>
