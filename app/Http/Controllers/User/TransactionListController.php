@@ -10,7 +10,7 @@ class TransactionListController extends Controller
 {
     public function index()
     {
-        $payment = Payment::with('vendor')->where('user_id', auth()->user()->id)->get();
+        $payment = Payment::with('vendor')->where('user_id', auth()->user()->id)->orderBy('created_at', 'Desc')->get();
         return view('users.transaction-list', [
             'title' => 'Daftar Transaksi',
             'payments' => $payment

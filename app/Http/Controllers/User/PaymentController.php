@@ -71,6 +71,8 @@ class PaymentController extends Controller
                 'price' => $cart->product->price,
             ]);
 
+            Cart::destroy($cart->id);
+
             // Optionally, you can update the status of the carts or perform other actions here
         }
 

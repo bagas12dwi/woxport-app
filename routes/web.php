@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\User\BlogController as UserBlogController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\PaymentController;
@@ -43,6 +44,14 @@ Route::get('/contact', function () {
         'title' => 'Contact Us'
     ]);
 });
+Route::get('/change-password', function () {
+    return view('users.change-password');
+});
+Route::get('/success', function () {
+    return view('users.success-payment', [
+        'title' => 'Success'
+    ]);
+});
 Route::get('/product', [UserProductController::class, 'index']);
 Route::get('/blog', [UserBlogController::class, 'index']);
 Route::get('/blog/detail/{blog_id}', [UserBlogController::class, 'detail']);
@@ -59,14 +68,7 @@ Route::get('/profile', [ProfileController::class, 'index']);
 Route::put('/profile/{user}', [ProfileController::class, 'update']);
 Route::get('/daftar-transaksi', [TransactionListController::class, 'index']);
 Route::get('/daftar-transaksi/detail/{order_number}', [TransactionListController::class, 'detail']);
-Route::get('/change-password', function () {
-    return view('users.change-password');
-});
-Route::get('/success', function () {
-    return view('users.success-payment', [
-        'title' => 'Success'
-    ]);
-});
+
 
 // Route Auth
 Route::get('/login', [AuthController::class, 'indexLogin']);
@@ -78,6 +80,13 @@ Route::post('/logout', [AuthController::class, 'logout']);
 // ROUTE VENDOR 
 Route::resource('/vendor/produk', ProductController::class);
 Route::get('/vendor/toko', [ShopController::class, 'index']);
+Route::get('/vendor/edit-toko', [ShopController::class, 'edit']);
+Route::post('/vendor/edit-toko', [ShopController::class, 'update']);
+Route::get('/vendor/transaksi', [TransactionController::class, 'index']);
+Route::get('/vendor/transaksi/konfirmasi', [TransactionController::class, 'indexConfirmTransaction']);
+Route::get('/vendor/transaksi/detail/{order_number}', [TransactionController::class, 'detail']);
+Route::post('/vendor/transaksi/konfirmasi/setuju', [TransactionController::class, 'konfirmasi']);
+Route::post('/vendor/transaksi/konfirmasi/tolak', [TransactionController::class, 'tolak']);
 
 // ROUTE ADMIN
 Route::get('/dashboard', [DashboardController::class, 'index']);

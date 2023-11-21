@@ -71,7 +71,7 @@
                 <h1 class="text-uppercase text-primary fw-bold mb-3">Top <span class="text-dark">recommendation</span></h1>
                 <div class="row g-2">
                     @foreach ($products as $product)
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <a href="{{ url('/vendor/detail/' . $product->id) }}" class="col-lg-3 nav-link col-md-6 col-sm-6">
                             <div class="card mx-auto bg-white border-0 shadow" style="width: 16rem;">
                                 <img src="{{ URL::asset('/storage/' . $product->imageProduct[0]->img_path) }}"
                                     class="card-img-top img-fluid" alt="Glamour Wedding"
@@ -80,7 +80,7 @@
                                     <h5 class="card-title fw-bold text-uppercase">{{ $product->product_name }}</h5>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>

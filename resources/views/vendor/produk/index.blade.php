@@ -31,6 +31,9 @@
         <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">{{ $title }} <span class="text-dark">Ku
             </span>
         </h1>
+        <a href="{{ url('/vendor/toko') }}" class="btn btn-secondary me-2">
+            <i class="bi bi-arrow-left"></i> Kembali
+        </a>
         <a href="{{ url('vendor/produk/create') }}" class="btn btn-primary">
             <i class="bi bi-plus-circle-fill me-2"></i>Tambahkan {{ $title }}
         </a>

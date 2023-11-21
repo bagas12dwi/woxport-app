@@ -91,6 +91,23 @@ class AuthController extends Controller
         return back()->with('errorLogin', 'Login Gagal !');
     }
 
+    public function changePassword(Request $request)
+    {
+        $validatedData = $request->validate([
+            'password' => 'required'
+        ]);
+
+        $password = bcrypt($validatedData['password']);
+
+        User::where('id', auth()->user()->id)->update($password);
+
+        if (auth()->user()->role == 'admin') {
+            return redirect()->intended('/dashboard');
+        } else {
+            return redirect()->intended('/');
+        }
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();

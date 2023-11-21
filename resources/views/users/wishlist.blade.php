@@ -19,7 +19,13 @@
                                 <div
                                     class="btn-product text-center flex-column align-items-center justify-content-center text-white rounded">
 
-                                    <a href="#" class="btn btn-primary mb-2">Add To Cart</a>
+                                    <form action="{{ url('/cart') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="qty" value="1">
+                                        <input type="hidden" name="product_id" value="{{ $wishlist->product->id }}">
+                                        <button type="submit" class="btn btn-primary mb-2">Add to
+                                            Cart</button>
+                                    </form>
                                     <a href="{{ url('vendor/detail/' . $wishlist->product->id) }}"
                                         class="btn btn-light mb-2">Show Details</a>
                                     <form action="{{ url('/wishlist/' . $wishlist->id) }}" method="POST">

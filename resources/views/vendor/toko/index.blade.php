@@ -2,6 +2,12 @@
 
 @section('konten')
     <div class="container my-4">
+        <div class="d-flex justify-content-end">
+            <span class="badge text-bg-primary p-2 fs-5 mb-3 me-2"><i class="bi bi-shop fs-4 me-2"></i>
+                {{ $vendor->vendor_name }}</span>
+            <span class="badge text-bg-success p-2 fs-5 mb-3"><i class="bi bi-cash-stack fs-4 me-2"></i>
+                @currency($paymentSuccess)</span>
+        </div>
         <div class="row">
             <div class="col-md-4 col-sm-6">
                 <a href="{{ url('vendor/produk') }}" class="nav-link">
@@ -16,26 +22,32 @@
                 </a>
             </div>
             <div class="col-md-4 col-sm-6">
-                <div class="card border-0 bg-white shadow">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-around align-items-center">
-                            <i class="bi bi-clipboard2-data-fill fs-1 me-2 text-primary"></i>
-                            <h4 class="fw-bold m-0 text-primary">{{ '8' }} Transaksi</h4>
+                <a href="{{ url('vendor/transaksi') }}" class="nav-link">
+                    <div class="card border-0 bg-white shadow">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-around align-items-center">
+                                <i class="bi bi-clipboard2-data-fill fs-1 me-2 text-primary"></i>
+                                <h4 class="fw-bold m-0 text-primary">{{ $payment }} Transaksi</h4>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-4 col-sm-6">
-                <div class="card border-0 bg-white shadow">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-around align-items-center">
-                            <i class="bi bi-clock-fill fs-1 me-2 text-primary"></i>
-                            <h4 class="fw-bold m-0 text-primary">{{ '8' }} Transaksi Belum<br>Disetujui</h4>
+                <a href="{{ url('/vendor/transaksi/konfirmasi') }}" class="nav-link">
+                    <div class="card border-0 bg-white shadow">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-around align-items-center">
+                                <i class="bi bi-clock-fill fs-1 me-2 text-primary"></i>
+                                <h4 class="fw-bold m-0 text-primary">{{ $paymentConfirm }} Transaksi Belum<br>Disetujui</h4>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
+        <a href="{{ url('/vendor/edit-toko') }}" class="btn btn-primary mt-5"><i class="bi bi-pencil-square"></i> Edit
+            Toko</a>
         <hr class="my-5">
         <h4 class="fw-bold mb-3 text-primary">
             Produk yang baru ditambahkan
