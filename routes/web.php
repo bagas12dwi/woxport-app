@@ -72,7 +72,9 @@ Route::group(['middleware' => ['auth', 'cekrole:user,vendor']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/change-password', function () {
-        return view('users.change-password');
+        return view('users.change-password', [
+            'title' => 'Ganti Password'
+        ]);
     });
     Route::post('/logout', [AuthController::class, 'logout']);
 });

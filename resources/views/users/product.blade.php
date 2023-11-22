@@ -15,8 +15,8 @@
 
                                 <a href="{{ url('/list_vendor/' . $category->id) }}" class="btn btn-primary">Cari Vendor</a>
                             </div>
-                            <h5 class="card-title fw-bold text-primary text-center">Special</h5>
-                            <p class="card-text text-center">{{ $category->category_name }}</p>
+                            <h5 class="card-title fw-bold text-primary text-center">{{ $category->category_name }}</h5>
+                            <p class="card-text text-center">Kategori</p>
                         </div>
                     </div>
                 </div>

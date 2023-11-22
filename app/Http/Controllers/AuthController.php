@@ -11,7 +11,9 @@ class AuthController extends Controller
 {
     public function indexRegister()
     {
-        return view('auth.register');
+        return view('auth.register',  [
+            'title' => 'Register'
+        ]);
     }
 
     public function indexLogin()

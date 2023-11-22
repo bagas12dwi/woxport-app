@@ -1,4 +1,4 @@
-<nav class="navbar container navbar-expand-lg bg-body-tertiary">
+<nav class="navbar container fixed-top navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="{{ URL::asset('assets/images/logo-atas.png') }}" alt="Bootstrap" height="30">
