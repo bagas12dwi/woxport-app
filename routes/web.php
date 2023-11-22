@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -68,6 +69,7 @@ Route::group(['middleware' => ['auth', 'cekrole:user,vendor']], function () {
     Route::put('/profile/{user}', [ProfileController::class, 'update']);
     Route::get('/daftar-transaksi', [TransactionListController::class, 'index']);
     Route::get('/daftar-transaksi/detail/{order_number}', [TransactionListController::class, 'detail']);
+    Route::post('/comment', [CommentController::class, 'store']);
 });
 
 Route::group(['middleware' => ['auth']], function () {

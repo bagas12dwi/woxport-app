@@ -1,3 +1,7 @@
+@php
+    use Carbon\Carbon;
+@endphp
+
 @extends('layouts.app')
 
 @section('konten')
@@ -48,12 +52,24 @@
                         class="text-decoration-line-through text-dark fs-6">Rp.
                         @currency($vendor->price + 100000)</span></h5>
                 <div class="d-flex text-warning">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                    <p class="ms-2 text-dark">(5 Customer review)</p>
+                    @php
+                        $rating = $comments->count() > 0 ? round($comments->sum('rating') / $comments->count(), 1) : 0;
+                        if ($rating - floor($rating) >= 0.5) {
+                            $rating = ceil($rating);
+                        } else {
+                            // Jika fraksi kurang dari atau sama dengan 0.5, bulatkan ke bawah
+                            $rating = floor($rating);
+                        }
+
+                        $bintangKosong = 5 - $rating;
+                    @endphp
+                    @for ($i = 0; $i < $rating; $i++)
+                        <i class="bi bi-star-fill"></i>
+                    @endfor
+                    @for ($i = 0; $i < $bintangKosong; $i++)
+                        <i class="bi bi-star"></i>
+                    @endfor
+                    <p class="ms-2 text-dark">({{ count($comments) }} Komentar)</p>
                 </div>
                 <hr>
                 <p class="text-truncate">{{ $vendor->description }} </p>
@@ -77,11 +93,11 @@
             <ul class="nav nav-tabs" id="myTabs" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1" role="tab"
-                        aria-controls="tab1" aria-selected="true">Description</a>
+                        aria-controls="tab1" aria-selected="true">Deskripsi</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2" role="tab"
-                        aria-controls="tab2" aria-selected="false">Reviews (2)</a>
+                        aria-controls="tab2" aria-selected="false">Komentar ({{ count($comments) }})</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabsContent">
@@ -91,63 +107,84 @@
                 </div>
                 <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                     <div class="d-flex my-3">
-                        <h3 class="me-3">Review (2)</h3>
-                        <button class="btn btn-primary">Leave a Review</button>
+                        <h3 class="me-3">Komentar ({{ count($comments) }})</h3>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="{{ auth()->user() ? '#commentModal' : '#warningModal' }} ">
+                            Tambahkan Komentar
+                        </button>
                     </div>
-                    <div class="card mb-3 bg-light border-0 shadow p-2">
-                        <div class="row g-0">
-                            <div class="col-lg-1 col-md-2 d-flex align-items-center justify-content-center">
-                                <img src="{{ URL::asset('assets/images/profil.jpg') }}" class="rounded-circle">
-                            </div>
-                            <div class="col-lg-11 col-md-10">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold">John Doe</h5>
-                                    <div class="d-flex text-warning">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
+                    @foreach ($comments as $comment)
+                        <div class="card mb-3 bg-light border-0 shadow p-2">
+                            <div class="row g-0">
+                                <div class="col-lg-1 col-md-2 d-flex align-items-center justify-content-center">
+                                    <img src="{{ URL::asset('assets/images/profil.jpg') }}" class="rounded-circle">
+                                </div>
+                                <div class="col-lg-11 col-md-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">{{ $comment->user->name }}</h5>
+                                        <div class="d-flex text-warning">
+                                            @php
+                                                $bintangKosong = 5 - $comment->rating;
+                                            @endphp
+                                            @for ($i = 0; $i < $comment->rating; $i++)
+                                                <i class="bi bi-star-fill"></i>
+                                            @endfor
+                                            @for ($i = 0; $i < $bintangKosong; $i++)
+                                                <i class="bi bi-star"></i>
+                                            @endfor
+                                        </div>
+                                        <p class="card-text">
+                                            <small
+                                                class="text-body-secondary">{{ \Carbon\Carbon::parse($comment->created_at)->locale('id_ID')->format('d F Y') }}</small>
+                                        </p>
+                                        <p class="card-text">{{ $comment->comment }}</p>
                                     </div>
-                                    <p class="card-text"><small class="text-body-secondary">22 Agustus 2023</small></p>
-                                    <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Temporibus iste doloribus dolor? Mollitia, quod rem nihil veniam, veritatis odio
-                                        quasi porro nulla cumque odit ut ab earum id recusandae? Necessitatibus modi
-                                        exercitationem voluptas voluptatum ut aperiam id? Deleniti voluptatem enim numquam
-                                        itaque tempore molestiae possimus assumenda repudiandae ipsam! Odit, nisi.</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="card mb-3 bg-light border-0 shadow p-2">
-                        <div class="row g-0">
-                            <div class="col-lg-1 col-md-2 d-flex align-items-center justify-content-center">
-                                <img src="{{ URL::asset('assets/images/profil.jpg') }}" class="rounded-circle">
-                            </div>
-                            <div class="col-lg-11 col-md-10">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold">John Doe</h5>
-                                    <div class="d-flex text-warning">
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                    </div>
-                                    <p class="card-text"><small class="text-body-secondary">22 Agustus 2023</small></p>
-                                    <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                        Temporibus iste doloribus dolor? Mollitia, quod rem nihil veniam, veritatis odio
-                                        quasi porro nulla cumque odit ut ab earum id recusandae? Necessitatibus modi
-                                        exercitationem voluptas voluptatum ut aperiam id? Deleniti voluptatem enim numquam
-                                        itaque tempore molestiae possimus assumenda repudiandae ipsam! Odit, nisi.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="commentModalLabel">Tambahkan Komentar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{ url('/comment') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Komentar</label>
+                        <textarea class="form-control" id="comment" name="comment" required></textarea>
+                    </div>
+                    <input type="hidden" name="product_id" value="{{ $vendor->id }}">
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Rating (1-5)</label>
+                        <input type="number" class="form-control" id="rating" name="rating" required
+                            min="1" max="5">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Silahkan login untuk menambahkan komentar!
+            </div>
+        </div>
+    </div>
+</div>
