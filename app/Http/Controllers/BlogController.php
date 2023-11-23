@@ -6,6 +6,8 @@ use App\DataTables\BlogDataTable;
 use App\Models\Blog;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -44,7 +46,19 @@ class BlogController extends Controller
 
         $validatedData['img_path'] = $request->file('img_path')->store('blog');
 
-        Blog::create($validatedData);
+        $blog = Blog::create($validatedData);
+
+        $users = User::where('role', '!=', 'admin')->get();
+
+        foreach ($users as $user) {
+            Notification::create([
+                'title' => 'Blog',
+                'content' => 'Ada artikel baru yang ditambahkan silahkan check ya !',
+                'url' => "/blog/detail/$blog->id",
+                'user_id' => $user->id
+            ]);
+        }
+
         return redirect()->intended('manage-blog')->with('success', 'Data Berhasil Diubah !');
     }
 

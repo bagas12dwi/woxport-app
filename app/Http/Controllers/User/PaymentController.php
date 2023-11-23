@@ -7,7 +7,9 @@ use App\Models\Payment;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Models\Cart;
+use App\Models\Notification;
 use App\Models\PaymentDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -76,6 +78,13 @@ class PaymentController extends Controller
             // Optionally, you can update the status of the carts or perform other actions here
         }
 
+        Notification::create([
+            'title' => 'Pembayaran',
+            'content' => 'Pembayaran anda dengan No. Order : <b>' . $payment->order_number . '</b> belum dibayar',
+            'url' => "/daftar-transaksi/detail/$payment->order_number",
+            'user_id' => auth()->user()->id
+        ]);
+
         return response()->json(['success' => true, 'order_number' => $payment->order_number]);
     }
 
@@ -109,7 +118,23 @@ class PaymentController extends Controller
         $validatedData['status'] = "Menunggu Konfirmasi";
 
         try {
+            $vendor = Payment::where('order_number', $orderNumber)->first();
+            $user = User::where('id', $vendor->user_id)->first();
+
             Payment::where('order_number', $orderNumber)->update($validatedData);
+            Notification::create([
+                'title' => 'Pembayaran',
+                'content' => 'Pembayaran anda dengan No. Order : <b>' . $orderNumber . '</b> sedang menunggu konfirmasi vendor',
+                'url' => "/daftar-transaksi/detail/$orderNumber",
+                'user_id' => auth()->user()->id
+            ]);
+
+            Notification::create([
+                'title' => 'Pemesanan',
+                'content' => 'Pemesanan dengan No. Order : <b>' . $orderNumber . '</b> menunggu konfirmasi vendor',
+                'url' => "/vendor/transaksi/detail/$orderNumber",
+                'user_id' => $user->id
+            ]);
         } catch (\Throwable $th) {
             dd($th);
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\Payment;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
@@ -52,8 +53,17 @@ class TransactionController extends Controller
             'id' => 'required'
         ]);
 
+        $payment = Payment::where('id', $validatedData['id'])->first();
+
         Payment::where('id', $validatedData['id'])->update([
             'status' => 'Disetujui'
+        ]);
+
+        Notification::create([
+            'title' => 'Pembayaran',
+            'content' => 'Pembayaran anda dengan No. Order : <b>' . $payment->order_number . '</b> telah disetujui',
+            'url' => "/daftar-transaksi/detail/$payment->order_number",
+            'user_id' => $payment->user_id
         ]);
 
         return redirect()->intended('/vendor/toko');
@@ -65,8 +75,17 @@ class TransactionController extends Controller
             'id' => 'required'
         ]);
 
+        $payment = Payment::where('id', $validatedData['id'])->first();
+
         Payment::where('id', $validatedData['id'])->update([
             'status' => 'Gagal'
+        ]);
+
+        Notification::create([
+            'title' => 'Pembayaran',
+            'content' => 'Pembayaran anda dengan No. Order : <b>' . $payment->order_number . '</b> telah ditolak',
+            'url' => "/daftar-transaksi/detail/$payment->order_number",
+            'user_id' => $payment->user_id
         ]);
 
         return redirect()->intended('/vendor/toko');

@@ -1,3 +1,8 @@
+@php
+    use App\Models\Notification;
+
+@endphp
+
 <nav class="navbar container fixed-top navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -32,6 +37,51 @@
             </ul>
             @auth
                 <ul class="navbar-nav me-2">
+                    <li class="nav-item dropdown notifikasi-dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="navbarDropdown"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @php
+                                $notifications = Notification::where('user_id', auth()->user()->id)
+                                    ->orderBy('created_at', 'desc')
+                                    ->orderBy('read', 'asc')
+                                    ->get();
+
+                                $notificationUnread = Notification::where('user_id', auth()->user()->id)
+                                    ->where('read', false)
+                                    ->get();
+                            @endphp
+
+                            <i class="bi bi-bell fs-5">
+                                @if (count($notificationUnread) > 0)
+                                    <span
+                                        class="position-absolute translate-middle p-1 bg-danger border border-light rounded-circle">
+                                        <span class="visually-hidden">New alerts</span>
+                                    </span>
+                                @endif
+                            </i>
+
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" style="width: 30rem">
+                            <ul class="list-group overflow-auto" style="max-height: 200px;">
+                                <li>
+                                    <a class="dropdown-header nav-link text-end text-primary"
+                                        href="{{ url('/notifications') }}">Lihat Semua</a>
+                                </li>
+                                @foreach ($notifications as $notification)
+                                    <li class="list-group-item mx-2 {{ $notification->read == false ? 'bg-white' : '' }}">
+                                        <a href="#" class="nav-link notification-list"
+                                            onclick="markAsRead('{{ route('notifications.mark-as-read', $notification) }}')">
+                                            <h5 class="{{ $notification->read == false ? 'fw-bold text-primary' : '' }}">
+                                                {{ $notification->title }}</h5>
+                                            <p>{!! $notification->content !!}</p>
+                                            <small
+                                                class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ url('cart') }}" class="nav-link fs-5">
                             <i class="bi bi-cart fs-5 ms-2"></i>
@@ -102,3 +152,32 @@
         </div>
     </div>
 </nav>
+
+
+<script>
+    function markAsRead(url) {
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+                body: JSON.stringify({}),
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse the JSON response
+            }).then(data => {
+                if (data.success) {
+                    // Redirect to the specified URL
+                    window.location.href = data.url_destination;
+                } else {
+                    console.error('Server response indicates failure:', data);
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+</script>

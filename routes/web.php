@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
@@ -70,6 +71,9 @@ Route::group(['middleware' => ['auth', 'cekrole:user,vendor']], function () {
     Route::get('/daftar-transaksi', [TransactionListController::class, 'index']);
     Route::get('/daftar-transaksi/detail/{order_number}', [TransactionListController::class, 'detail']);
     Route::post('/comment', [CommentController::class, 'store']);
+    Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::post('/notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
+    Route::get('/notifications/dropdown', [NotificationController::class, 'dropdown']);
 });
 
 Route::group(['middleware' => ['auth']], function () {
