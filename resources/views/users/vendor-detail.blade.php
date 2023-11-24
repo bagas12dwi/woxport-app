@@ -87,8 +87,7 @@
                         </div>
                         <input type="hidden" name="product_id" value="{{ $vendor->id }}">
                         <button type="submit" class="btn btn-primary ms-2 align-self-start"><i
-                                class="bi bi-cart-plus-fill fs-4 me-2"></i>Add to
-                            Cart</button>
+                                class="bi bi-cart-plus-fill fs-4 me-2"></i>Tambahkan ke Keranjang</button>
                     </div>
                 </form>
             </div>
@@ -170,15 +169,15 @@
                 <form method="post" action="{{ url('/comment') }}">
                     @csrf
                     <div class="mb-3">
-                        <label for="comment" class="form-label">Komentar</label>
-                        <textarea class="form-control" id="comment" name="comment" required></textarea>
-                    </div>
-                    <input type="hidden" name="product_id" value="{{ $vendor->id }}">
-                    <div class="mb-3">
                         <label for="rating" class="form-label">Rating (1-5)</label>
                         <input type="number" class="form-control" id="rating" name="rating" required
                             min="1" max="5">
                     </div>
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Komentar</label>
+                        <textarea class="form-control" id="comment" name="comment" required></textarea>
+                    </div>
+                    <input type="hidden" name="product_id" value="{{ $vendor->id }}">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

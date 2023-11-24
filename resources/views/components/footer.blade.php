@@ -8,11 +8,11 @@
         </div>
 
         <ul class="nav col-md-4 col-12 justify-content-center text-center text-md-start">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">About</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Product</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Blog</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Contact Us</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Beranda</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Tentang Kami</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Produk</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Artikel</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Hubungi Kami</a></li>
         </ul>
 
         <ul class="nav col-md-4 col-12 justify-content-center justify-content-md-end list-unstyled d-flex">

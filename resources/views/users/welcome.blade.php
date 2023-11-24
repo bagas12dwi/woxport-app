@@ -9,7 +9,7 @@
                         <br>
                         <span class="text-black"> In Here!</span>
                     </h1>
-                    <a href="{{ url('product') }}" class="btn btn-primary text-uppercase fw-bold">Shop Now ></a>
+                    <a href="{{ url('product') }}" class="btn btn-primary text-uppercase fw-bold">Belanja Sekarang ></a>
                 </div>
                 <div class="col-md-6 col-sm-12 text-center">
                     <img src="{{ URL::asset('/assets/images/main-bg.png') }}" alt="home" class="img-fluid">
@@ -48,7 +48,7 @@
 
     <section id="kategori">
         <div class="container text-center">
-            <h1 class="text-uppercase text-primary fw-bold mb-3">Our <span class="text-dark">Categories </span></h1>
+            <h1 class="text-uppercase text-primary fw-bold mb-3">Our <span class="text-dark">Kategori </span></h1>
             <div class="row g-2">
                 @foreach ($categories as $category)
                     <div class="col-lg-4 col-md-6">
@@ -68,7 +68,7 @@
     @if (count($products) > 0)
         <section id="rekomendasi" class="my-5">
             <div class="container text-center">
-                <h1 class="text-uppercase text-primary fw-bold mb-3">Top <span class="text-dark">recommendation</span></h1>
+                <h1 class="text-uppercase text-primary fw-bold mb-3">Top <span class="text-dark">Rekomendasi</span></h1>
                 <div class="row g-2">
                     @foreach ($products as $product)
                         <a href="{{ url('/vendor/detail/' . $product->id) }}" class="col-lg-3 nav-link col-md-6 col-sm-6">
@@ -90,7 +90,7 @@
 
     <section id="kontak" class="my-3">
         <div class="container text-center">
-            <h1 class="text-uppercase text-primary fw-bold mb-3">Contact <span class="text-dark">Us</span></h1>
+            <h1 class="text-uppercase text-primary fw-bold mb-3">Hubungi <span class="text-dark">Kami</span></h1>
             <div class="row">
                 <div class="col-md-6">
                     <iframe

@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="container my-3">
-        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Contact <span class="text-dark">Us </span></h1>
+        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Kontak <span class="text-dark">Kami </span></h1>
 
         <div class="row">
             <div class="col-md-6">

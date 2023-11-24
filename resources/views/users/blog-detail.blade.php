@@ -9,7 +9,7 @@
         <h1 class="fw-bold">
             {{ $blog->title }}
         </h1>
-        <p class="card-text"><small class="text-body-secondary">Last updated
+        <p class="card-text"><small class="text-body-secondary">Terakhir Diubah
                 {{ $blog->updated_at->diffForHumans() }}</small></p>
         <p>
             <!-- Add responsive classes for text -->
@@ -18,6 +18,6 @@
             </small>
         </p>
         <a class="btn btn-primary" href="{{ url('blog') }}">
-            <i class="bi bi-arrow-left"></i> Back </a>
+            <i class="bi bi-arrow-left"></i> Kembali </a>
     </div>
 @endsection

@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="container my-3">
-        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Our <span class="text-dark">Vendor</span>
+        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Vendor <span class="text-dark">Kami</span>
         </h1>
         <div class="row g-4">
             @if (count($vendor) > 0)
@@ -23,11 +23,10 @@
                                         @csrf
                                         <input type="hidden" name="qty" value="1">
                                         <input type="hidden" name="product_id" value="{{ $vendor->id }}">
-                                        <button type="submit" class="btn btn-primary mb-2">Add to
-                                            Cart</button>
+                                        <button type="submit" class="btn btn-primary mb-2">Tambahkan ke Keranjang</button>
                                     </form>
-                                    <a href="{{ url('vendor/detail/' . $vendor->id) }}" class="btn btn-light">Show
-                                        Details</a>
+                                    <a href="{{ url('vendor/detail/' . $vendor->id) }}" class="btn btn-light">Lihat
+                                        Detail</a>
                                 </div>
                                 <h5 class="card-title fw-bold text-primary text-center">@currency($vendor->promotion_price > 0 ? $vendor->promotion_price : $vendor->price)
                                     @if ($vendor->promotion_price > 0)

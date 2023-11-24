@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="container my-3">
-        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Our <span class="text-dark">Product </span></h1>
+        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Produk <span class="text-dark">Kami </span></h1>
         <div class="row g-4">
             @foreach ($categories as $category)
                 <div class="col-md-4 col-sm-12">

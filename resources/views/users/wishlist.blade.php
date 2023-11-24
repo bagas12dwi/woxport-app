@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="container my-3">
-        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">My <span class="text-dark">Wishlist </span></h1>
+        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Wishlist <span class="text-dark">Ku </span></h1>
         <div class="row g-4">
             @if (count($wishlists) > 0)
                 @foreach ($wishlists as $wishlist)
@@ -23,15 +23,14 @@
                                         @csrf
                                         <input type="hidden" name="qty" value="1">
                                         <input type="hidden" name="product_id" value="{{ $wishlist->product->id }}">
-                                        <button type="submit" class="btn btn-primary mb-2">Add to
-                                            Cart</button>
+                                        <button type="submit" class="btn btn-primary mb-2">Tambahkan ke Keranjang</button>
                                     </form>
                                     <a href="{{ url('vendor/detail/' . $wishlist->product->id) }}"
-                                        class="btn btn-light mb-2">Show Details</a>
+                                        class="btn btn-light mb-2">Lihat Detail</a>
                                     <form action="{{ url('/wishlist/' . $wishlist->id) }}" method="POST">
                                         @csrf
                                         @method('delete')
-                                        <button class="btn btn-danger">Delete</button>
+                                        <button class="btn btn-danger">Hapus</button>
                                     </form>
                                 </div>
                                 <h5 class="card-title fw-bold text-primary text-center">

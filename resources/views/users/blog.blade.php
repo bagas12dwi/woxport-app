@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="container my-3">
-        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Our <span class="text-dark">Blog </span></h1>
+        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Artikel <span class="text-dark">Kami </span></h1>
         <div class="row g-4">
             @if (count($blogs) > 0)
                 @foreach ($blogs as $blog)
@@ -16,8 +16,8 @@
                                     style="max-width: 400px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                     <p class="card-text">{!! $blog->body !!}</p>
                                 </div>
-                                <a href="{{ url('blog/detail/' . $blog->id) }}" class="btn btn-primary">Read More</a>
-                                <p class="card-text"><small class="text-body-secondary">Last updated
+                                <a href="{{ url('blog/detail/' . $blog->id) }}" class="btn btn-primary">Lanjut Baca</a>
+                                <p class="card-text"><small class="text-body-secondary">Terakhir Diupdate
                                         {{ $blog->updated_at->diffForHumans() }}</small></p>
                             </div>
                         </div>

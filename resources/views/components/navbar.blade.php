@@ -16,23 +16,23 @@
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link fs-5 {{ $title == 'Home' ? 'active' : '' }}" aria-current="page"
-                        href="{{ url('/') }}">Home</a>
+                        href="{{ url('/') }}">Beranda</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fs-5 {{ $title == 'About' ? 'active' : '' }}" aria-current="page"
-                        href="{{ url('about') }}">About</a>
+                        href="{{ url('about') }}">Tentang Kami</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fs-5 {{ $title == 'Product' ? 'active' : '' }}" aria-current="page"
-                        href="{{ url('product') }}">Product</a>
+                        href="{{ url('product') }}">Produk</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fs-5 {{ $title == 'Blog' ? 'active' : '' }}" aria-current="page"
-                        href="{{ url('blog') }}">Blog</a>
+                        href="{{ url('blog') }}">Artikel</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fs-5 {{ $title == 'Contact Us' ? 'active' : '' }}" aria-current="page"
-                        href="{{ url('contact') }}">Contact Us</a>
+                        href="{{ url('contact') }}">Hubungi Kami</a>
                 </li>
             </ul>
             @auth
@@ -144,11 +144,11 @@
                         <ul class="dropdown-menu bg-white border-0 shadow-sm">
                             <li><a class="dropdown-item" href="{{ url('profile') }}">
                                     <i class="bi bi-person-circle me-2"></i>
-                                    Profile</a></li>
+                                    Profil</a></li>
                             <li>
                             <li><a class="dropdown-item" href="{{ url('change-password') }}">
                                     <i class="bi bi-key me-2"></i>
-                                    Change Password</a></li>
+                                    Ubah Password</a></li>
                             <li>
                             <li><a class="dropdown-item" href="{{ url('daftar-transaksi') }}">
                                     <i class="bi bi-card-list me-2"></i>

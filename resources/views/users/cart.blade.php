@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="container my-3">
-        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">My <span class="text-dark">Cart </span></h1>
+        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Keranjang <span class="text-dark">Ku </span></h1>
         @if (session()->has('success'))
             <div class="alert alert-success d-flex align-items-center" role="alert">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="container my-3">
-        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">My <span class="text-dark">Profile </span></h1>
+        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Profil <span class="text-dark">Ku </span></h1>
         <div class="card bg-white border-0 shadow p-4">
             <form action="{{ url('/profile/' . $user->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
