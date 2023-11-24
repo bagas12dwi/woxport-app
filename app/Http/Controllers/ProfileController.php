@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -24,6 +25,13 @@ class ProfileController extends Controller
             'phone' => 'required',
             'address' => 'required'
         ]);
+
+        if ($request->file('img_path')) {
+            if ($request->oldImg != null) {
+                Storage::delete($request->oldImg);
+            }
+            $validatedData['img_path'] = $request->file('img_path')->store('profil');
+        }
 
         User::where('id', $user->id)->update($validatedData);
 

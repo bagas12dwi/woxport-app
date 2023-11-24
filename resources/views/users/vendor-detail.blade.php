@@ -121,7 +121,13 @@
                         <div class="card mb-3 bg-light border-0 shadow p-2">
                             <div class="row g-0">
                                 <div class="col-lg-1 col-md-2 d-flex align-items-center justify-content-center">
-                                    <img src="{{ URL::asset('assets/images/profil.jpg') }}" class="rounded-circle">
+                                    @if ($comment->user->img_path != null)
+                                        <img src="{{ URL::asset('/storage/' . auth()->user()->img_path) }}"
+                                            class="rounded-circle profile" alt="foto profil" width="75"
+                                            height="75" style="object-fit: cover">
+                                    @else
+                                        <img src="{{ URL::asset('assets/images/profil.jpg') }}" class="rounded-circle">
+                                    @endif
                                 </div>
                                 <div class="col-lg-11 col-md-10">
                                     <div class="card-body">

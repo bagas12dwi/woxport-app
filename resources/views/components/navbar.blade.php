@@ -130,8 +130,16 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            <i class="bi bi-person-circle fs-5 mx-2"></i> <span class="fs-6 m-0">
-                                {{ auth()->user()->name }}</span>
+                            @if (auth()->user()->img_path != null)
+                                <img src="{{ URL::asset('/storage/' . auth()->user()->img_path) }}"
+                                    class="rounded-circle profile" alt="foto profil"
+                                    style="width: 1.5rem; height: 1.5rem; object-fit: cover">
+                            @else
+                                <i class="bi bi-person-circle fs-5 mx-2"></i>
+                            @endif
+                            <span class="fs-6 m-0">
+                                {{ auth()->user()->name }}
+                            </span>
                         </a>
                         <ul class="dropdown-menu bg-white border-0 shadow-sm">
                             <li><a class="dropdown-item" href="{{ url('profile') }}">
