@@ -46,7 +46,7 @@ class PaymentController extends Controller
         $vendorId = 0;
         foreach ($cartIds as $cartId) {
             $cart = Cart::findOrFail($cartId);
-            $totalPrice += $cart->product->price * $cart->qty;
+            $totalPrice += $cart->product->promotion_price > 0 ? $cart->product->promotion_price : $cart->product->price * $cart->qty;
             $vendorId = $cart->vendor_id;
         }
 
@@ -70,7 +70,7 @@ class PaymentController extends Controller
                 'payment_id' => $payment->id,
                 'product_id' => $cart->product->id,
                 'qty' => $cart->qty,
-                'price' => $cart->product->price,
+                'price' => $cart->product->promotion_price > 0 ? $cart->product->promotion_price : $cart->product->price,
             ]);
 
             Cart::destroy($cart->id);

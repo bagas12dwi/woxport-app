@@ -69,9 +69,14 @@
                             <div class="card-body">
                                 <h5 class="card-title fw-bold">{{ $product->product_name }} </h5>
                                 <p class="card-text text-truncate"> {{ $product->description }} </p>
-                                <p class="card-text fs-4"><small class="text-body-secondary">@currency($product->price)
-                                    </small>
-                                </p>
+                                <h5 class="card-text fw-bold text-primary text-start">
+                                    @currency($product->promotion_price > 0 ? $product->promotion_price : $product->price)
+                                    @if ($product->promotion_price > 0)
+                                        <span class="text-decoration-line-through fs-6 text-dark">
+                                            @currency($product->price)
+                                        </span>
+                                    @endif
+                                </h5>
                                 <div class="d-flex text-start justify-content-end w-full">
 
                                     <form action="{{ url('vendor/produk/' . $product->id) }}" method="post">

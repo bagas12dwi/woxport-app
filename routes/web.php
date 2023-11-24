@@ -72,8 +72,8 @@ Route::group(['middleware' => ['auth', 'cekrole:user,vendor']], function () {
     Route::get('/daftar-transaksi/detail/{order_number}', [TransactionListController::class, 'detail']);
     Route::post('/comment', [CommentController::class, 'store']);
     Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::get('/notifications/promo', [NotificationController::class, 'promo']);
     Route::post('/notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
-    Route::get('/notifications/dropdown', [NotificationController::class, 'dropdown']);
 });
 
 Route::group(['middleware' => ['auth']], function () {

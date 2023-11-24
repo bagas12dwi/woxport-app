@@ -42,11 +42,17 @@
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @php
                                 $notifications = Notification::where('user_id', auth()->user()->id)
+                                    ->where('title', '!=', 'Promosi')
                                     ->orderBy('created_at', 'desc')
                                     ->orderBy('read', 'asc')
                                     ->get();
 
                                 $notificationUnread = Notification::where('user_id', auth()->user()->id)
+                                    ->where('read', false)
+                                    ->get();
+
+                                $notificationPromoUnread = Notification::where('user_id', auth()->user()->id)
+                                    ->where('title', 'Promosi')
                                     ->where('read', false)
                                     ->get();
                             @endphp
@@ -62,24 +68,53 @@
 
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" style="width: 30rem">
-                            <ul class="list-group overflow-auto" style="max-height: 200px;">
-                                <li>
-                                    <a class="dropdown-header nav-link text-end text-primary"
-                                        href="{{ url('/notifications') }}">Lihat Semua</a>
-                                </li>
-                                @foreach ($notifications as $notification)
-                                    <li class="list-group-item mx-2 {{ $notification->read == false ? 'bg-white' : '' }}">
-                                        <a href="#" class="nav-link notification-list"
-                                            onclick="markAsRead('{{ route('notifications.mark-as-read', $notification) }}')">
-                                            <h5 class="{{ $notification->read == false ? 'fw-bold text-primary' : '' }}">
-                                                {{ $notification->title }}</h5>
-                                            <p>{!! $notification->content !!}</p>
-                                            <small
-                                                class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
+                            @if (count($notifications) > 0)
+                                <ul class="list-group overflow-auto" style="max-height: 200px;">
+                                    <li>
+                                        <a class="dropdown-header nav-link text-end text-primary"
+                                            href="{{ url('/notifications') }}">Lihat Semua</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('notifications/promo') }}" class="nav-link">
+                                            <div
+                                                class="card shadow border-0 mx-2 mb-2 p-3 {{ count($notificationPromoUnread) > 0 ? 'bg-white text-primary' : '' }}">
+                                                <div class="card-title fw-bold fs-5">Promo</div>
+                                                @if (count($notificationPromoUnread) > 0)
+                                                    <span
+                                                        class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                                        <span class="visually-hidden">New alerts</span>
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </a>
                                     </li>
-                                @endforeach
-                            </ul>
+                                    @foreach ($notifications as $notification)
+                                        <li
+                                            class="list-group-item mx-2 {{ $notification->read == false ? 'bg-white' : '' }}">
+                                            <a href="#" class="nav-link notification-list"
+                                                onclick="markAsRead('{{ route('notifications.mark-as-read', $notification) }}')">
+                                                <h5
+                                                    class="{{ $notification->read == false ? 'fw-bold text-primary' : '' }}">
+                                                    {{ $notification->title }}</h5>
+                                                <p>{!! $notification->content !!}</p>
+                                                <small
+                                                    class="text-muted">{{ $notification->created_at->diffForHumans() }}</small>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <div class="col-12 text-center d-flex align-items-center justify-content-center mt-5">
+                                    <div>
+                                        <img class="img-fluid w-75" src="{{ URL::asset('/assets/images/404.svg') }}"
+                                            alt="404 not found">
+                                        <h1 class="fs-4 mt-5">Belum ada <span
+                                                class="fw-bolder text-primary">Notifikasi!</span>
+                                        </h1>
+                                        <p class="lead my-4 fs-5">Belum ada notifikasi</p>
+                                    </div>
+                                </div>
+                            @endif
                         </ul>
                     </li>
                     <li class="nav-item">

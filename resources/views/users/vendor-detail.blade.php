@@ -48,9 +48,13 @@
                     @endif
                 </div>
                 <hr>
-                <h5 class="fw-bold text-primary">@currency($vendor->price) <span
-                        class="text-decoration-line-through text-dark fs-6">Rp.
-                        @currency($vendor->price + 100000)</span></h5>
+                <h5 class="fw-bold text-primary">@currency($vendor->promotion_price > 0 ? $vendor->promotion_price : $vendor->price)
+                    @if ($vendor->promotion_price > 0)
+                        <span class="text-decoration-line-through text-dark fs-6">
+                            @currency($vendor->price)
+                        </span>
+                    @endif
+                </h5>
                 <div class="d-flex text-warning">
                     @php
                         $rating = $comments->count() > 0 ? round($comments->sum('rating') / $comments->count(), 1) : 0;
@@ -82,7 +86,7 @@
                             <small id="helpqty" class="form-text text-muted">Masukkan Qty pesan</small>
                         </div>
                         <input type="hidden" name="product_id" value="{{ $vendor->id }}">
-                        <button type="submit" class="btn btn-primary ms-2"><i
+                        <button type="submit" class="btn btn-primary ms-2 align-self-start"><i
                                 class="bi bi-cart-plus-fill fs-4 me-2"></i>Add to
                             Cart</button>
                     </div>

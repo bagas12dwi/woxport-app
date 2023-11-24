@@ -33,7 +33,7 @@
                                         <div class="d-flex flex-column ms-2">
                                             <h5 class="card-title fw-bold">{{ $paymentDetail->product->product_name }}
                                             </h5>
-                                            <p class="card-text">@currency($paymentDetail->product->price)</p>
+                                            <p class="card-text">@currency($paymentDetail->price)</p>
                                         </div>
                                     </div>
                                 </div>

@@ -67,9 +67,14 @@
                                         <i class="bi bi-pencil-fill"></i> Edit
                                     </a>
                                 </div>
-                                <h5 class="card-title fw-bold text-primary text-center">@currency($item->price) <span
-                                        class="text-decoration-line-through fs-6 text-dark">Rp.
-                                        @currency($item->price + 100000) </span></h5>
+                                <h5 class="card-title fw-bold text-primary text-center">
+                                    @currency($item->promotion_price > 0 ? $item->promotion_price : $item->price)
+                                    @if ($item->promotion_price > 0)
+                                        <span class="text-decoration-line-through fs-6 text-dark">
+                                            @currency($item->price)
+                                        </span>
+                                    @endif
+                                </h5>
                                 <p class="card-text text-center">{{ $item->product_name }}</p>
 
                             </div>

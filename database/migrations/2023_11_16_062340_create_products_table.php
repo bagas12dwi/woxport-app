@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->text('description');
             $table->double('price');
+            $table->double('promotion_price')->default(0);
             $table->foreignId('category_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('vendor_id')
                 ->nullable()

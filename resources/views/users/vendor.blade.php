@@ -29,10 +29,12 @@
                                     <a href="{{ url('vendor/detail/' . $vendor->id) }}" class="btn btn-light">Show
                                         Details</a>
                                 </div>
-                                <h5 class="card-title fw-bold text-primary text-center">@currency($vendor->price)
-                                    <span class="text-decoration-line-through fs-6 text-dark">Rp.
-                                        @currency($vendor->price + 100000)
-                                    </span>
+                                <h5 class="card-title fw-bold text-primary text-center">@currency($vendor->promotion_price > 0 ? $vendor->promotion_price : $vendor->price)
+                                    @if ($vendor->promotion_price > 0)
+                                        <span class="text-decoration-line-through fs-6 text-dark">
+                                            @currency($vendor->price)
+                                        </span>
+                                    @endif
                                 </h5>
                                 <p class="card-text text-center">{{ $vendor->product_name }}</p>
                             </div>

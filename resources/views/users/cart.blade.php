@@ -55,10 +55,11 @@
                                                 <div class="d-flex flex-column ms-2 w-100">
                                                     <h5 class="card-title fw-bold">{{ $cart->product->product_name }}</h5>
                                                     <p class="card-text mb-auto">
-                                                        @currency($cart->product->price)</p>
+                                                        @currency($cart->product->promotion_price > 0 ? $cart->product->promotion_price : $cart->product->price)</p>
                                                     <p class="card-text mb-auto d-none"
                                                         id="hargaBarang_{{ $cart->id }}">
-                                                        {{ $cart->product->price }}</p>
+                                                        {{ $cart->product->promotion_price > 0 ? $cart->product->promotion_price : $cart->product->price }}
+                                                    </p>
                                                     <div class="d-flex flex-row">
                                                         <form action="{{ url('cart/' . $cart->id) }}" method="POST"
                                                             class="ms-auto me-2">

@@ -30,6 +30,12 @@
                 <small id="helpprice" class="form-text text-muted">Masukkan Harga</small>
             </div>
             <div class="mb-3">
+                <label for="promotion_price" class="form-label">Harga Promosi</label>
+                <input type="number" class="form-control" name="promotion_price" id="promotion_price"
+                    aria-describedby="helppromotion_price" placeholder="Harga" value="{{ $product->promotion_price }}">
+                <small id="helppromotion_price" class="form-text text-muted">Masukkan Harga</small>
+            </div>
+            <div class="mb-3">
                 <label for="img_path" class="form-label">Pilih Gambar</label>
                 <input type="file" class="form-control" name="img_path[]" id="img_path" placeholder="Pilih Gambar"
                     aria-describedby="fileHelpId" multiple>

@@ -28,6 +28,24 @@ class NotificationController extends Controller
         ]);
     }
 
+    public function promo()
+    {
+        $notifications = Notification::where('user_id', auth()->user()->id)
+            ->where('title', 'Promosi')
+            ->orderBy('created_at', 'desc')
+            ->orderBy('read', 'asc')
+            ->get();
+
+        $notificationUnread = Notification::where('user_id', auth()->user()->id)
+            ->where('read', false)
+            ->get();
+
+        return view('users.notifications-promo', [
+            'title' => 'Notifikasi',
+            'notifications' => $notifications,
+        ]);
+    }
+
     public function markAsRead(Notification $notification)
     {
         $notification->update(['read' => true]);
