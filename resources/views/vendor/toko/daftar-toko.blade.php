@@ -25,6 +25,21 @@
                         placeholder="No. Rekening">
                 </div>
                 <div class="mb-3">
+                    <label for="province" class="form-label">Provinsi</label>
+                    <select class="form-select" name="province" id="province">
+                        <option selected>-- Pilih Provinsi --</option>
+                        @foreach ($provinces as $province)
+                            <option value="{{ $province['id'] }}">{{ $province['name'] }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="regency" class="form-label">Kabupaten / Kota</label>
+                    <select class="form-select" name="regency" id="regency" disabled>
+                        <option selected>-- Pilih Kabupaten --</option>
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label for="address" class="form-label">Alamat</label>
                     <textarea class="form-control" name="address" id="address" rows="3"></textarea>
                 </div>
@@ -35,3 +50,52 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the province and regency dropdown elements
+            const provinceDropdown = document.getElementById('province');
+            const regencyDropdown = document.getElementById('regency');
+
+            // Add event listener to the province dropdown
+            provinceDropdown.addEventListener('change', function() {
+                const selectedProvinceId = this.value;
+
+                // If a province is selected, make an API request for corresponding regencies
+                if (selectedProvinceId !== '') {
+                    // Replace the URL with the correct API endpoint
+                    const apiUrl =
+                        `https://bagas12dwi.github.io/api-wilayah-indonesia/api/regencies/${selectedProvinceId}.json`;
+
+                    // Enable the regency dropdown while making the request
+                    regencyDropdown.disabled = false;
+
+                    // Clear existing options
+                    regencyDropdown.innerHTML = '<option selected>-- Pilih Kabupaten --</option>';
+
+                    // Fetch the regencies
+                    fetch(apiUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Populate the regency dropdown with fetched data
+                            data.forEach(regency => {
+                                const option = document.createElement('option');
+                                option.value = regency.id;
+                                option.text = regency.name;
+                                regencyDropdown.appendChild(option);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching regencies:', error);
+                        });
+                } else {
+                    // If no province is selected, disable the regency dropdown
+                    regencyDropdown.disabled = true;
+                    // Clear existing options
+                    regencyDropdown.innerHTML = '<option selected>-- Pilih Kabupaten --</option>';
+                }
+            });
+        });
+    </script>
+@endpush

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('address');
             $table->foreignId('bank_account_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('bank_account_number');
+            $table->string('province');
+            $table->string('regency');
             $table->timestamps();
         });
     }

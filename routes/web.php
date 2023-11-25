@@ -16,6 +16,7 @@ use App\Http\Controllers\User\BlogController as UserBlogController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\ProductController as UserProductController;
+use App\Http\Controllers\User\SearchController;
 use App\Http\Controllers\User\TransactionListController;
 use App\Http\Controllers\User\VendorController;
 use App\Http\Controllers\User\WishlistController;
@@ -74,6 +75,7 @@ Route::group(['middleware' => ['auth', 'cekrole:user,vendor']], function () {
     Route::get('/notifications', [NotificationController::class, 'index']);
     Route::get('/notifications/promo', [NotificationController::class, 'promo']);
     Route::post('/notifications/{notification}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
+    Route::post('/vendor/search', [SearchController::class, 'index']);
 });
 
 Route::group(['middleware' => ['auth']], function () {

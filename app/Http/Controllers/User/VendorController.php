@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Wishlist;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class VendorController extends Controller
@@ -13,9 +14,16 @@ class VendorController extends Controller
     public function index($category_id)
     {
         $vendor = Product::with('imageProduct')->where('category_id', '=', $category_id)->get();
+        $client = new Client();
+
+        $response = $client->get('https://bagas12dwi.github.io/api-wilayah-indonesia/api/provinces.json');
+
+        $province = json_decode($response->getBody(), true);
         return view('users.vendor', [
             'title' => 'Vendor Product',
-            'vendor' => $vendor
+            'vendor' => $vendor,
+            'provinces' => $province,
+            'category_id' => $category_id
         ]);
     }
 

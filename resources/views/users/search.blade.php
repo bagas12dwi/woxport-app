@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="container my-3">
-        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Vendor <span class="text-dark">Kami</span>
+        <h1 class="text-uppercase text-primary fw-bold mb-3 text-center">Pencarian <span class="text-dark">Vendor</span>
         </h1>
         <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="bi bi-filter-right"></i> Filter
@@ -64,8 +64,8 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Filter Berdasarkan</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ url('/vendor/search/') }}" method="post">
+                <form action="{{ url('/vendor/search') }}" method="post">
+                    <div class="modal-body">
                         @csrf
                         <div class="mb-3">
                             <label for="province" class="form-label">Provinsi</label>
@@ -93,10 +93,10 @@
                             </div>
                         </div>
                         <input type="hidden" name="category_id" value="{{ $category_id }}">
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Cari</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Cari</button>
+                    </div>
                 </form>
             </div>
         </div>

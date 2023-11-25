@@ -7,6 +7,7 @@ use App\Http\Requests\StoreVendorRequest;
 use App\Http\Requests\UpdateVendorRequest;
 use App\Models\BankAccount;
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class VendorController extends Controller
@@ -17,9 +18,16 @@ class VendorController extends Controller
     public function index()
     {
         $bank = BankAccount::all();
+        $client = new Client();
+
+        $response = $client->get('https://bagas12dwi.github.io/api-wilayah-indonesia/api/provinces.json');
+
+        $province = json_decode($response->getBody(), true);
+
         return view('vendor.toko.daftar-toko', [
             'title' => 'Daftar Toko',
-            'banks' => $bank
+            'banks' => $bank,
+            'provinces' => $province
         ]);
     }
 
@@ -41,9 +49,21 @@ class VendorController extends Controller
             'address' => 'required',
             'bank_account_id' => 'required',
             'bank_account_number' => 'required',
+            'province' => 'required',
+            'regency' => 'required'
         ]);
 
+        $client = new Client();
+
+        $responseProvince = $client->get("https://bagas12dwi.github.io/api-wilayah-indonesia/api/province/$request->province.json");
+        $responseRegency = $client->get("https://bagas12dwi.github.io/api-wilayah-indonesia/api/regency/$request->regency.json");
+
+        $province = json_decode($responseProvince->getBody(), true);
+        $regency = json_decode($responseRegency->getBody(), true);
+
         $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['province'] = $province['name'];
+        $validatedData['regency'] = $regency['name'];
 
         Vendor::create($validatedData);
         User::where('id', auth()->user()->id)->update([
