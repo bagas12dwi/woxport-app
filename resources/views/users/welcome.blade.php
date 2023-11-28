@@ -9,7 +9,8 @@
                         <br>
                         <span class="text-black"> In Here!</span>
                     </h1>
-                    <a href="{{ url('product') }}" class="btn btn-primary text-uppercase fw-bold">Belanja Sekarang ></a>
+                    <a href="{{ url('product') }}" class="btn btn-primary text-uppercase fw-bold">Belanja Sekarang <i
+                            class="bi bi-arrow-right fs-5 ms-2"></i></a>
                 </div>
                 <div class="col-md-6 col-sm-12 text-center">
                     <img src="{{ URL::asset('/assets/images/main-bg.png') }}" alt="home" class="img-fluid">
